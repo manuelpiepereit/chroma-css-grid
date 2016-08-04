@@ -1,0 +1,30 @@
+{
+	"name": "chroma-css",
+	"version": "2.0.0",
+	"description": "new chroma version",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/neonpastell/chroma-css"
+	},
+	"homepage": "https://github.com/neonpastell/chroma-css",
+	"main": "_mq.scss",
+	"authors": [
+		"Manuel Piepereit <manuel.piepereit@neonpastell.de> (http://www.neonpastell.de/)"
+	],
+	"license": "MIT",
+	"ignore": [
+		"CHANGELOG.md",
+		"CONTRIBUTING.md",
+		"package.json",
+		"README.md",
+		"test.html"
+	],
+	"dependencies": {
+		
+	},
+	"devDependencies": {
+		"normalize.css": "4.2.0",
+		"sass-mq": "3.2.9"
+	}
+
+}

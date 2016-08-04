@@ -1,0 +1,121 @@
+/*
+*	Chroma grid
+*/
+
+
+//
+//	functions
+//
+@function chroma-column-width($current-column, $total-columns) {
+	@return $current-column/$total-columns * 100%;
+}
+
+
+
+//
+//	mixins
+//
+$chroma-is-static-layout: false !default; // sets a static container layout with fixed width
+
+// add max container width if needed
+@mixin chroma-container($max-width: $chroma-grid-max-width) {
+	@include chroma-clearfix;
+	@if ($max-width != null) {
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+		max-width: $max-width;
+	}
+	@if ($chroma-is-static-layout == true) {
+		@if ($max-width == null) {
+			@warn "Static container layout needs maximum width.";
+		}
+		width: $max-width;
+	}
+}
+
+@mixin chroma-row() {
+	@include chroma-clearfix;
+}
+
+// column 2, 12
+@mixin chroma-column($current-column, $column-amount: $chroma-grid-amount) {
+	$width: chroma-column-width($current-column, $column-amount);
+	width: $width;
+	*width:	$width - 0.0694%; // IE6 & IE7 Subpixel-Fix
+}
+
+
+// creates layout elements
+@mixin chroma-create-layout() {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-container} {
+		@include chroma-container();
+	}
+
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+		@include chroma-row();
+	}
+	
+	[class*="#{$chroma-grid-name-col}"] {
+		padding-left: $chroma-grid-gutter;
+		padding-right: $chroma-grid-gutter;
+		> .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+			margin-left: -$chroma-grid-gutter;
+			margin-right: -$chroma-grid-gutter;
+		}
+		float: left;
+		display: block;
+	}
+}
+// creates column
+@mixin chroma-create-column($i, $total-columns: $chroma-grid-amount) {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i},
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$total-columns} {
+		@include chroma-column($i);
+	}
+	
+	// add basic fraction classes
+	$_chroma-grid-fraction: $i/$total-columns;
+	@if $_chroma-grid-fraction == 1/2 {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/2 {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i};
+		}
+	} 
+	@if $_chroma-grid-fraction == 1/4 {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/4 {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i};
+		}
+	} 
+	@if $_chroma-grid-fraction == 1/3 {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/3 {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i};
+		}
+	} 
+	@if $_chroma-grid-fraction == 1/1 {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-full,
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/1 {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i};
+		}
+	}
+}
+
+
+
+
+//
+//	scaffolding
+//
+
+@if ($chroma-grid-scaffolding == true) {
+	
+	@include chroma-create-layout();
+
+	// columns spanning from 1 to N
+	@for $i from 1 through $chroma-grid-amount {
+		@include chroma-create-column($i, $chroma-grid-amount);
+	}
+
+}
+
+
+

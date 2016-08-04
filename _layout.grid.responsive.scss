@@ -1,0 +1,150 @@
+/*
+*   Chroma grid responsive
+*/
+
+
+//
+//  functions
+//
+@function mapReverse ($map) {
+    $result: null;
+
+    @if type-of($map) == "map" {
+        $keys: map-keys($map);
+        $map-reversed: ();
+        
+        @for $i from length($keys) through 1 {
+            $map-reversed: map-merge(
+                $map-reversed,
+                (nth($keys, $i): map-get($map, nth($keys, $i)))
+            );
+        }
+
+        @if type-of($map-reversed) == "map" {
+            $result: $map-reversed;
+        } @else {
+            @warn 'There was an error reversing the order of "#{$map}"';
+        }
+    } @else {
+        @warn '"#{$map}" is not a valid map';
+    }
+
+    @return $result;
+}
+
+
+
+
+
+//
+//  settings
+// 
+
+// check if layout is mobile first and set variables
+@if ($chroma-grid-mobile-first == false) {
+    // reverse breakpoint map
+    $chroma-breakpoints-reverse: mapReverse($mq-breakpoints);
+    $chroma-breakpoints: $chroma-breakpoints-reverse;
+}
+
+
+
+
+
+// sass-mq based on mobile first layout var
+@mixin media($breakpoint) {
+    @if ($chroma-grid-mobile-first == true) {
+        @include mq($from: $breakpoint) {
+            @content;
+        }
+    } @else {
+        @include mq($until: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+
+
+
+//
+//  mixins for default classes
+//
+
+@mixin chroma-create-column-responsive($breakpoint) {
+    @for $i from 1 through $chroma-grid-amount {
+        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint} {
+            @include chroma-column($i, $chroma-grid-amount);
+        }
+    }    
+}
+
+
+
+//
+//  scaffolding
+//
+
+@if ($chroma-grid-responsive-scaffolding == true) {
+    @each $_mq, $_px in $chroma-breakpoints {
+        @if ($chroma-grid-mobile-first == true) {
+            // create all column classes for each breakpoint
+            @include mq($from: $_mq) {
+                @include chroma-create-column-responsive($_mq);
+            }
+        } @else {
+            @include mq($until: $_mq) {
+                @include chroma-create-column-responsive($_mq);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+/**
+*   Chroma grid responsive modifiers
+*/
+
+@mixin chroma-create-column-responsive-modifier($breakpoint, $i, $total-columns: $chroma-grid-amount) {
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--push {
+        @include chroma-column-push($i, $total-columns);
+    }
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--pull {
+        @include chroma-column-pull($i, $total-columns);
+    }
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--offset {
+        @include chroma-column-offset($i, $total-columns);
+    }
+}
+
+@if mixin-exists(chroma-column-push) {
+} @else {
+    $chroma-grid-modifier-scaffolding: false;
+}
+
+@if ($chroma-grid-responsive-scaffolding == true AND $chroma-grid-modifier-scaffolding == true) {
+    // responsive modifiers
+    @each $_mq, $_px in $chroma-breakpoints {
+        @if ($chroma-grid-mobile-first == true) {    
+            @include mq($from: $_mq) {
+                @for $i from 0 through $chroma-grid-amount {
+                    @include chroma-create-column-responsive-modifier($_mq, $i, $chroma-grid-amount);
+                }
+            }
+        } @else {        
+            @include mq($until: $_mq) {
+                @for $i from 0 through $chroma-grid-amount {
+                    @include chroma-create-column-responsive-modifier($_mq, $i, $chroma-grid-amount);
+                }
+            }
+        }
+    }
+}
+

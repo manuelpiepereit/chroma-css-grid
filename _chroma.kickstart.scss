@@ -1,0 +1,32 @@
+/* Normalize */		
+/* = include ../normalize.css/normalize.css */
+
+
+
+// $chroma-grid-amount: 12;
+// $chroma-grid-gutter: 10px;
+// $chroma-grid-max-width: 1080px;
+
+// $chroma-breakpoints: (
+//     S:  740px,
+//     HD:  1920px,
+// );
+
+
+
+//$chroma-grid-mobile-first: false;
+
+//$chroma-grid-scaffolding: false;
+//$chroma-grid-modifier-scaffolding: false;
+//$chroma-grid-responsive-scaffolding: false;
+
+// include basic grid files
+@import "layout.base";			// base classes and settings
+@import "../bower_components/sass-mq/mq"; // import sass-mq
+@import "layout.grid.default";
+@import "layout.grid.modifier";
+@import "layout.grid.responsive";
+
+
+
+@import "chroma/debug.grid";

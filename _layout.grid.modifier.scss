@@ -1,0 +1,138 @@
+/*
+*	Chroma grid modifiers
+*/
+
+
+//
+//	mixins public
+//
+
+@mixin chroma-column-push($current-column, $total-columns: $chroma-grid-amount){
+	$width:			chroma-column-width($current-column, $total-columns);
+	position: 		relative;
+	left: 			$width;
+}
+
+@mixin chroma-column-pull($current-column, $total-columns: $chroma-grid-amount){
+	$width:			chroma-column-width($current-column, $total-columns);
+	position: 		relative;
+	right: 			$width;
+}
+
+@mixin chroma-column-offset($current-column, $total-columns: $chroma-grid-amount){
+	$width:			chroma-column-width($current-column, $total-columns);
+	margin-left: 	$width;
+}
+
+
+
+
+
+@mixin chroma-column-center() {
+	margin-left: auto;
+	margin-right: auto;
+	float: none;
+	clear: both;
+}
+
+@mixin chroma-column-left() {
+	float: left;
+}
+
+@mixin chroma-column-right() {
+	float: right;
+}
+
+@mixin chroma-column-bleed() {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+
+
+
+
+
+
+
+
+//
+//	mixins for default classes
+//
+
+@mixin chroma-create-column-push($i) {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push,
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--push {
+		@include chroma-column-push($i, $chroma-grid-amount);
+	}
+}
+
+@mixin chroma-create-column-pull($i) {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull,
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--pull {
+		@include chroma-column-pull($i, $chroma-grid-amount);
+	}
+}
+
+@mixin chroma-create-column-offset($i) {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset,
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--offset {
+		@include chroma-column-offset($i, $chroma-grid-amount);
+	}
+}
+
+
+
+
+
+@mixin chroma-create-column-center() {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--center {
+		@include chroma-column-center()
+	}
+}
+
+@mixin chroma-create-column-left() {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--right {
+		@include chroma-column-left()
+	}
+}
+
+@mixin chroma-create-column-right() {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--right {
+		@include chroma-column-right()
+	}
+}
+
+@mixin chroma-create-column-bleed() {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--bleed {
+		@include chroma-column-bleed()
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+//
+//	scaffolding
+//
+
+@if ($chroma-grid-modifier-scaffolding == true) {
+
+	@for $i from 1 through $chroma-grid-amount {
+		@include chroma-create-column-push($i);
+		@include chroma-create-column-pull($i);
+		@include chroma-create-column-offset($i);	
+	}
+	@include chroma-create-column-center();
+	@include chroma-create-column-left();
+	@include chroma-create-column-right();
+	@include chroma-create-column-bleed();
+
+}

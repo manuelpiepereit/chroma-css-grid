@@ -1,6 +1,6 @@
 {
 	"name": "chroma-css",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "new chroma version",
 	"repository": {
 		"type": "git",
@@ -20,11 +20,11 @@
 		"test.html"
 	],
 	"dependencies": {
-		
-	},
-	"devDependencies": {
 		"normalize.css": "4.2.0",
 		"sass-mq": "3.2.9"
+	},
+	"devDependencies": {
+		
 	}
 
 }

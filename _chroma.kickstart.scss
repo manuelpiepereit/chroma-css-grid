@@ -1,4 +1,5 @@
 
+
 //
 // define your own settings
 // 
@@ -25,10 +26,12 @@
 
 // $chroma-grid-scaffold-default			: false;
 // $chroma-grid-scaffold-modifier			: false;
-// $chroma-grid-scaffold-responsive		: false;
-// $chroma-grid-scaffold-utils				: false;
-// $chroma-grid-scaffold-utils-responsive	: false;
-// $chroma-grid-scaffold-debug				: true;
+//$chroma-grid-scaffold-responsive		: false;
+//$chroma-grid-scaffold-utils				: false;
+//$chroma-grid-scaffold-utils-responsive	: false;
+// $chroma-grid-scaffold-utils-print			: false;
+//$chroma-grid-scaffold-debug				: true;
+
 
 
 
@@ -36,11 +39,12 @@
 // then include all files
 // 
 
-@import "layout.base";							// base classes and settings
-@import "../sass-mq/mq"; 						// import sass-mq
-@import "layout.grid.default";
+@import "layout.base";							// base grid settings
+@import "../../bower_components/sass-mq/mq"; 	// import sass-mq
+@import "layout.grid.default";					// import other files
 @import "layout.grid.modifier";
 @import "layout.grid.responsive";
 @import "layout.utils";
 @import "layout.utils.responsive";
+@import "layout.utils.print";
 @import "debug.grid";

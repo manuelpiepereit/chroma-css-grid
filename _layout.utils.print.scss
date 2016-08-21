@@ -1,0 +1,59 @@
+/*
+*   Chroma CSS utils.print
+*/
+
+
+
+//
+//  mixins for default classes
+//
+
+// creates basic classes
+@mixin chroma-create-util-print-classes() {    
+
+    .show-print,
+    .show-print-block,
+    .show-print-inline,
+    .show-print-inline-block, {
+    	display: none !important;
+    }
+
+    @media print { 
+		.show-print,
+	    .show-print-block {
+	    	display: block !important;
+	    }
+	    table.show-print {
+			display: table !important;
+		}
+		tr.show-print {
+			display: table-row !important;
+		}
+		th.show-print,
+		td.show-print {
+			display: table-cell !important;
+		}
+	    .show-print-inline {
+	    	display: inline !important;	
+	    }
+	    .show-print-inline-block {
+	    	display: inline-block !important;
+	    }
+	    
+	    .hide-print,
+	    .hidden-print {
+	    	display: none !important;
+	    }
+    }
+
+}
+
+
+
+//
+//  scaffolding for responsive utils
+//
+
+@if ($chroma-grid-scaffold-utils-print == true) {
+    @include chroma-create-util-print-classes();
+}

@@ -8,11 +8,33 @@
 //
 //  mixins public
 //
-@mixin chroma-hidden() {
-    display: none !important;
+@mixin chroma-hide($mq: false) {
+    @if ($mq == false) {
+        display: none !important;
+    } @else {
+        @media #{$mq} {
+            display: none !important;
+        }
+    }
 }
-@mixin chroma-show($type: block) {
-    display: $type !important;
+// alias
+@mixin chroma-hidden($args...) {
+    @include chroma-hide($args...) { @content };
+}
+
+@mixin chroma-show($type: block, $mq: false) {
+    @if ($mq == false) {
+        display: $type !important;
+    } @else {
+        @include hide();
+        @media #{$mq} {
+            display: $type !important;
+        }   
+    }
+}
+// alias
+@mixin chroma-visible($args...) {
+    @include chroma-show($args...) { @content };
 }
 
 
@@ -26,9 +48,10 @@ $chroma-visible-display: (block, inline, inline-block);
 
 // creates basic classes
 @mixin chroma-create-util-classes() {
-    .hidden, 
+    .hide,
+    .hidden,
     [hidden] {
-        @include chroma-hidden();
+        @include chroma-hide();
     }
     .show {
         @include chroma-show();

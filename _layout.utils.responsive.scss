@@ -9,8 +9,9 @@
 
 // creates all responsive classes
 @mixin chroma-create-util-responsive-classes($breakpoint) {
+    .hide#{$chroma-breakpoint-delimiter}#{$breakpoint},
     .hidden#{$chroma-breakpoint-delimiter}#{$breakpoint} {
-        @include chroma-hidden();
+        @include chroma-hide();
     }
     
     @each $_display in $chroma-visible-display {
@@ -31,6 +32,12 @@
     th.show#{$chroma-breakpoint-delimiter}#{$breakpoint},
     td.show#{$chroma-breakpoint-delimiter}#{$breakpoint} {
         @include chroma-show('table-cell');
+    }
+    .visible#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        visibility: visible !important;
+    }
+    .invisible#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        visibility: hidden !important;
     }
 }
 
@@ -58,11 +65,11 @@
     // hide all breakpoints
     @each $_mq, $_px in $chroma-breakpoints {
         .show#{$chroma-breakpoint-delimiter}#{$_mq} {
-            @extend .hidden;
+            @extend .hide;
         }
         @each $_display in $chroma-visible-display {
             .show-#{$_display}#{$chroma-breakpoint-delimiter}#{$_mq} {
-                @extend .hidden;
+                @extend .hide;
             }
         }
     }

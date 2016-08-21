@@ -1,0 +1,82 @@
+/*
+*   Chroma CSS utils.responsive
+*/
+
+
+//
+//  mixins for default classes
+//
+
+// creates all responsive classes
+@mixin chroma-create-util-responsive-classes($breakpoint) {
+    .hidden#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-hidden();
+    }
+    
+    @each $_display in $chroma-visible-display {
+        .show-#{$_display}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+            @include chroma-show($_display);
+        }
+
+    }
+    .show#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @extend .show-block#{$chroma-breakpoint-delimiter}#{$breakpoint};
+    }
+    table.show#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-show('table');
+    }
+    tr.show#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-show('table-row');
+    }
+    th.show#{$chroma-breakpoint-delimiter}#{$breakpoint},
+    td.show#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-show('table-cell');
+    }
+}
+
+
+
+
+
+
+
+
+
+//
+//  scaffolding for responsive utils
+//
+
+// check for existing responsive mixin
+@if mixin-exists(chroma-media) {
+} @else {
+    $chroma-grid-scaffold-responsive: false;
+}
+
+
+@if ($chroma-grid-scaffold-utils-responsive == true AND $chroma-grid-scaffold-responsive == true) {
+    
+    // hide all breakpoints
+    @each $_mq, $_px in $chroma-breakpoints {
+        .show#{$chroma-breakpoint-delimiter}#{$_mq} {
+            @extend .hidden;
+        }
+        @each $_display in $chroma-visible-display {
+            .show-#{$_display}#{$chroma-breakpoint-delimiter}#{$_mq} {
+                @extend .hidden;
+            }
+        }
+    }
+
+    // responsive modifiers
+    @each $_mq, $_px in $chroma-breakpoints {
+        @if ($chroma-is-mobile-first == true) {    
+            @include mq($from: $_mq) {
+                @include chroma-create-util-responsive-classes($_mq);
+            }
+        } @else {        
+            @include mq($until: $_mq) {
+                @include chroma-create-util-responsive-classes($_mq);
+            }
+        }
+    }
+}

@@ -1,91 +1,41 @@
-//
-//	settings
-//
-$chroma-grid-namespace  : "" !default;					// custom namespace prefix
-
-$chroma-grid-name-container   : "container" !default;	// custom container name
-$chroma-grid-name-row   : "row" !default;				// custom row name
-$chroma-grid-name-col   : "cols" !default;				// custom column name
-
-
-$chroma-grid-amount		: 12 !default; 					// number of total columns
-$chroma-grid-gutter		: 10px !default; 				// gutter between columns
-$chroma-grid-max-width  : null !default					// maximum container width
-
-
-$chroma-grid-mobile-first: true !default;				// if layout is mobile first
-
-$chroma-grid-scaffolding: true !default;				// creat default grid classes
-$chroma-grid-modifier-scaffolding: true !default;		// creat default grid modifier classes
-$chroma-grid-responsive-scaffolding: true !default;		// creat default grid responsive classes
-
-
-
-
-
-$chroma-breakpoints : ( 								// default breakpoints for responsive views
-    sm:  320px,
-    md:  740px,
-    lg:  980px,
-    xl:  1300px,
-) !default;
-$mq-breakpoints : $chroma-breakpoints !default;			// overwrite sass-mq variable
-
-
-
-
-$chroma-use-fractions  : true !default;
-@if ($chroma-use-fractions == true) {
-    $chroma-widths-delimiter: \/ !global;
-} @else {
-    $chroma-widths-delimiter: of !global;
-}
-
-
 
 //
-//	mixins
+//	Chroma CSS grid settings
 //
-@mixin chroma-clearfix {
-	@extend .clearfix;
-}
+
+// grid settings
+$chroma-grid-amount				: 12 !default; 			// number of total columns
+$chroma-grid-gutter				: 10px !default; 		// gutter between columns
+$chroma-grid-max-width  		: null !default			// maximum container width
+
+$chroma-is-mobile-first 		: true !default;		// if layout is mobile first
+$chroma-is-static-layout 		: false !default; 		// sets a static container layout with fixed width
+
+$chroma-breakpoints 			: ( 					// default breakpoints for responsive views
+								    sm:  320px,
+								    md:  740px,
+								    lg:  980px,
+								    xl:  1300px,
+								) !default;
+$mq-breakpoints: $chroma-breakpoints !default;			// overwrite sass-mq variable. this is important!
+
+
+// class namings
+$chroma-grid-namespace  		: "" !default;			// custom namespace prefix
+$chroma-grid-name-container   	: "container" !default;	// custom container name
+$chroma-grid-name-row   		: "row" !default;		// custom row name
+$chroma-grid-name-col   		: "cols" !default;		// custom column name
+
+$chroma-breakpoint-delimiter 	: \@ !default;			// how breakpoints are seperated in classes
+$chroma-column-delimiter 		: false !default; 		// additional classes for columns, eg: cols-5/12 or cols-5-of-12
 
 
 
+// scaffold default classes
+$chroma-grid-scaffold-default			: true !default;		// creates default grid classes
+$chroma-grid-scaffold-modifier			: true !default;		// creates default grid modifier classes
+$chroma-grid-scaffold-responsive		: true !default;		// creates default grid responsive classes
+$chroma-grid-scaffold-utils				: true !default;		// creates default utils classes
+$chroma-grid-scaffold-utils-responsive	: true !default;		// creates default responsive utils classes
+$chroma-grid-scaffold-debug				: false !default; 		// creates some debugging classes
 
-
-* {
-	box-sizing: border-box;
-	&:before,
-	&:after {
-		box-sizing: border-box;
-	}
-
-}
-
-.clearfix {
-	*zoom: 1;
-
-	&:before,
-	&:after {
-		content: " ";
-		display: table;
-	}
-
-	&:after {
-		clear: both;
-	}	
-}
-
-// always hide hidden elements
-.hidden, [hidden] {
-	display: none !important;
-}
-
-// image fit
-img.fit,
-.chroma-img {
-	max-width: 100%;
-	height: auto;
-	display: block;
-}

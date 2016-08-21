@@ -1,5 +1,5 @@
 /*
-*	Chroma grid modifiers
+*	Chroma CSS grid.modifiers
 */
 
 
@@ -61,23 +61,35 @@
 //
 
 @mixin chroma-create-column-push($i) {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push,
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--push {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push {
 		@include chroma-column-push($i, $chroma-grid-amount);
+	}
+	@if ($chroma-column-delimiter) {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--push {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push;
+		}	
 	}
 }
 
 @mixin chroma-create-column-pull($i) {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull,
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--pull {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull {
 		@include chroma-column-pull($i, $chroma-grid-amount);
+	}
+	@if ($chroma-column-delimiter) {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--pull {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull;
+		}	
 	}
 }
 
 @mixin chroma-create-column-offset($i) {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset,
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$chroma-grid-amount}--offset {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset {
 		@include chroma-column-offset($i, $chroma-grid-amount);
+	}
+	@if ($chroma-column-delimiter) {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--offset {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset;
+		}	
 	}
 }
 
@@ -92,7 +104,7 @@
 }
 
 @mixin chroma-create-column-left() {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--right {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--left {
 		@include chroma-column-left()
 	}
 }
@@ -123,7 +135,7 @@
 //	scaffolding
 //
 
-@if ($chroma-grid-modifier-scaffolding == true) {
+@if ($chroma-grid-scaffold-modifier == true) {
 
 	@for $i from 1 through $chroma-grid-amount {
 		@include chroma-create-column-push($i);

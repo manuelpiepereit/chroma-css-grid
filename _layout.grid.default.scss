@@ -1,5 +1,5 @@
 /*
-*	Chroma grid
+*	Chroma CSS grid.default
 */
 
 
@@ -15,7 +15,11 @@
 //
 //	mixins
 //
-$chroma-is-static-layout: false !default; // sets a static container layout with fixed width
+
+// clearfix
+@mixin chroma-clearfix() {
+	@extend .#{$chroma-grid-namespace}clearfix !optional;
+}
 
 // add max container width if needed
 @mixin chroma-container($max-width: $chroma-grid-max-width) {
@@ -34,44 +38,48 @@ $chroma-is-static-layout: false !default; // sets a static container layout with
 	}
 }
 
+// row element
 @mixin chroma-row() {
 	@include chroma-clearfix;
 }
 
-// column 2, 12
+// generic column class
+@mixin chroma-column-generic() {
+	@extend [class*="#{$chroma-grid-name-col}"] !optional;
+}
+
+// columns 2, 12
 @mixin chroma-column($current-column, $column-amount: $chroma-grid-amount) {
 	$width: chroma-column-width($current-column, $column-amount);
 	width: $width;
 	*width:	$width - 0.0694%; // IE6 & IE7 Subpixel-Fix
+	@content;
+}
+
+// chroma-column alias
+@mixin chroma-columns($args...) {
+	@include chroma-column($args...) { @content };
 }
 
 
-// creates layout elements
-@mixin chroma-create-layout() {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-container} {
-		@include chroma-container();
-	}
 
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
-		@include chroma-row();
-	}
-	
-	[class*="#{$chroma-grid-name-col}"] {
-		padding-left: $chroma-grid-gutter;
-		padding-right: $chroma-grid-gutter;
-		> .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
-			margin-left: -$chroma-grid-gutter;
-			margin-right: -$chroma-grid-gutter;
-		}
-		float: left;
-		display: block;
-	}
-}
+
+
+
+
+
+
+
 // creates column
-@mixin chroma-create-column($i, $total-columns: $chroma-grid-amount) {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i},
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-widths-delimiter}#{$total-columns} {
+@mixin chroma-create-column-classes($i, $total-columns: $chroma-grid-amount) {
+	
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i} {
 		@include chroma-column($i);
+	}
+	@if ($chroma-column-delimiter) {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$total-columns} {
+			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i};
+		}
 	}
 	
 	// add basic fraction classes
@@ -102,20 +110,71 @@ $chroma-is-static-layout: false !default; // sets a static container layout with
 
 
 
+
+
+
 //
-//	scaffolding
+//	base classes
 //
 
-@if ($chroma-grid-scaffolding == true) {
-	
-	@include chroma-create-layout();
-
-	// columns spanning from 1 to N
-	@for $i from 1 through $chroma-grid-amount {
-		@include chroma-create-column($i, $chroma-grid-amount);
+// box-sizing
+* {
+	box-sizing: border-box;
+	&:before,
+	&:after {
+		box-sizing: border-box;
 	}
 
 }
 
+// clearfix
+.#{$chroma-grid-namespace}clearfix {
+	*zoom: 1;
 
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}	
+}
+
+// container
+.#{$chroma-grid-namespace}#{$chroma-grid-name-container} {
+	@include chroma-container();
+}
+
+// row
+.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+	@include chroma-row();
+}
+
+// generic column
+[class*="#{$chroma-grid-name-col}"] {
+	padding-left: $chroma-grid-gutter;
+	padding-right: $chroma-grid-gutter;
+	> .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+		margin-left: -$chroma-grid-gutter;
+		margin-right: -$chroma-grid-gutter;
+	}
+	float: left;
+	display: block;
+}
+
+
+
+
+
+//
+//	scaffolding
+//
+@if ($chroma-grid-scaffold-default == true) {
+	// columns spanning from 1 to N
+	@for $i from 1 through $chroma-grid-amount {
+		@include chroma-create-column-classes($i, $chroma-grid-amount);
+	}
+}
 

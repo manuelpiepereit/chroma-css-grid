@@ -1,5 +1,5 @@
 /*
-*   Chroma grid responsive
+*   Chroma CSS grid.responsive
 */
 
 
@@ -41,7 +41,7 @@
 // 
 
 // check if layout is mobile first and set variables
-@if ($chroma-grid-mobile-first == false) {
+@if ($chroma-is-mobile-first == false) {
     // reverse breakpoint map
     $chroma-breakpoints-reverse: mapReverse($mq-breakpoints);
     $chroma-breakpoints: $chroma-breakpoints-reverse;
@@ -52,8 +52,8 @@
 
 
 // sass-mq based on mobile first layout var
-@mixin media($breakpoint) {
-    @if ($chroma-grid-mobile-first == true) {
+@mixin chroma-media($breakpoint) {
+    @if ($chroma-is-mobile-first == true) {
         @include mq($from: $breakpoint) {
             @content;
         }
@@ -63,6 +63,11 @@
         }
     }
 }
+// alias for chroma-media
+@mixin at($args...) {
+    @include chroma-media($args...) { @content };
+}
+
 
 
 
@@ -71,10 +76,15 @@
 //  mixins for default classes
 //
 
-@mixin chroma-create-column-responsive($breakpoint) {
+@mixin chroma-create-grid-responsive($breakpoint, $total-columns: $chroma-grid-amount) {
     @for $i from 1 through $chroma-grid-amount {
-        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint} {
+        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
             @include chroma-column($i, $chroma-grid-amount);
+        }
+        @if ($chroma-column-delimiter) {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$total-columns}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint};
+            }   
         }
     }    
 }
@@ -82,19 +92,19 @@
 
 
 //
-//  scaffolding
+//  scaffolding for responsive columns
 //
 
-@if ($chroma-grid-responsive-scaffolding == true) {
+@if ($chroma-grid-scaffold-responsive == true) {
     @each $_mq, $_px in $chroma-breakpoints {
-        @if ($chroma-grid-mobile-first == true) {
+        @if ($chroma-is-mobile-first == true) {
             // create all column classes for each breakpoint
             @include mq($from: $_mq) {
-                @include chroma-create-column-responsive($_mq);
+                @include chroma-create-grid-responsive($_mq);
             }
         } @else {
             @include mq($until: $_mq) {
-                @include chroma-create-column-responsive($_mq);
+                @include chroma-create-grid-responsive($_mq);
             }
         }
     }
@@ -111,38 +121,72 @@
 /**
 *   Chroma grid responsive modifiers
 */
+@mixin chroma-create-grid-responsive-modifier($breakpoint, $total-columns: $chroma-grid-amount) {
+    
+    // push, pull, offset
+    @for $i from 0 through $total-columns {
+        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+            @include chroma-column-push($i, $total-columns);
+        }
+        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+            @include chroma-column-pull($i, $total-columns);
+        }
+        .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+            @include chroma-column-offset($i, $total-columns);
+        }
 
-@mixin chroma-create-column-responsive-modifier($breakpoint, $i, $total-columns: $chroma-grid-amount) {
-    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--push {
-        @include chroma-column-push($i, $total-columns);
+        @if ($chroma-column-delimiter) {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--push#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push#{$chroma-breakpoint-delimiter}#{$breakpoint};
+            }
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--pull#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull#{$chroma-breakpoint-delimiter}#{$breakpoint};
+            }
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--offset#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset#{$chroma-breakpoint-delimiter}#{$breakpoint};
+            }
+        }
     }
-    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--pull {
-        @include chroma-column-pull($i, $total-columns);
+
+    // center, left, right, bleed
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}--center#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-column-center()
     }
-    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--#{$breakpoint}--offset {
-        @include chroma-column-offset($i, $total-columns);
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}--left#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-column-left()
     }
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}--right#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-column-right()
+    }
+    .#{$chroma-grid-namespace}#{$chroma-grid-name-col}--bleed#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+        @include chroma-column-bleed()
+    }
+
 }
 
+
+
+
+
+
+//
+//  scaffolding for responsive modifiers
+//
 @if mixin-exists(chroma-column-push) {
 } @else {
-    $chroma-grid-modifier-scaffolding: false;
+    $chroma-grid-scaffold-modifier: false;
 }
 
-@if ($chroma-grid-responsive-scaffolding == true AND $chroma-grid-modifier-scaffolding == true) {
+@if ($chroma-grid-scaffold-responsive == true AND $chroma-grid-scaffold-modifier == true) {
     // responsive modifiers
     @each $_mq, $_px in $chroma-breakpoints {
-        @if ($chroma-grid-mobile-first == true) {    
+        @if ($chroma-is-mobile-first == true) {    
             @include mq($from: $_mq) {
-                @for $i from 0 through $chroma-grid-amount {
-                    @include chroma-create-column-responsive-modifier($_mq, $i, $chroma-grid-amount);
-                }
+                @include chroma-create-grid-responsive-modifier($_mq, $chroma-grid-amount);
             }
         } @else {        
             @include mq($until: $_mq) {
-                @for $i from 0 through $chroma-grid-amount {
-                    @include chroma-create-column-responsive-modifier($_mq, $i, $chroma-grid-amount);
-                }
+                @include chroma-create-grid-responsive-modifier($_mq, $chroma-grid-amount);
             }
         }
     }

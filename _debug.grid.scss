@@ -1,26 +1,36 @@
-/* DEBUG start */
-.container,
-.row {
-	background-color: rgba(150, 150, 150, 0.05);
-}
-.row {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-[class*="cols"] {
-	background-color: rgba(150, 150, 150, 0.05);
-}
-.cell {
-	background-color: rgba(0, 0, 150, 0.05);
-	border-radius: 3px;
-	border: 1px solid rgba(0, 0, 150, 0.1);	
-}
+/*
+*   Debugging classes
+*/
 
-.focus {
-	&[class*="cols"],
-	&.cell {
-		background: red;
-		color: white;	
+@if ($chroma-grid-scaffold-debug == true) {
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-container},
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+		background-color: rgba(150, 150, 150, 0.05);
+	}
+
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	[class*="#{$chroma-grid-name-col}"] {
+		background-color: rgba(150, 150, 150, 0.05);
+	}
+
+
+
+
+	.cell {
+		background-color: rgba(0, 0, 150, 0.05);
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 150, 0.1);	
+	}
+
+	.focus {
+		&[class*="cols"],
+		&.cell {
+			background: red;
+			color: white;	
+		}
 	}
 }
-/* DEBUG end */

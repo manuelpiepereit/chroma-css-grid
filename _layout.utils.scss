@@ -1,0 +1,57 @@
+/*
+*   Chroma CSS utils
+*/
+
+
+
+
+//
+//  mixins public
+//
+@mixin chroma-hidden() {
+    display: none !important;
+}
+@mixin chroma-show($type: block) {
+    display: $type !important;
+}
+
+
+
+
+//
+//  mixins for default classes
+//
+
+$chroma-visible-display: (block, inline, inline-block);
+
+// creates basic classes
+@mixin chroma-create-util-classes() {
+    .hidden, 
+    [hidden] {
+        @include chroma-hidden();
+    }
+    .show {
+        @include chroma-show();
+    }
+    @each $_display in $chroma-visible-display {
+        .show-#{$_display} {
+            @include chroma-show(#{$_display});
+        }
+    }
+    .visible {
+        visibility: visible !important;
+    }
+    .invisible {
+        visibility: hidden !important;
+    }
+}
+
+
+
+//
+//  scaffolding for responsive utils
+//
+
+@if ($chroma-grid-scaffold-utils == true) {
+    @include chroma-create-util-classes();
+}

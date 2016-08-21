@@ -1,32 +1,46 @@
-/* Normalize */		
-/* = include ../normalize.css/normalize.css */
+
+//
+// define your own settings
+// 
+
+// $chroma-grid-amount			: 12;
+// $chroma-grid-gutter			: 10px;
+// $chroma-grid-max-width		: 1080px;
+
+// $chroma-is-mobile-first		: false;
+
+// $chroma-breakpoints			: (
+// 							    SD:  740px,
+// 							    HD:  1920px,
+// 							);
 
 
 
-// $chroma-grid-amount: 12;
-// $chroma-grid-gutter: 10px;
-// $chroma-grid-max-width: 1080px;
-
-// $chroma-breakpoints: (
-//     S:  740px,
-//     HD:  1920px,
-// );
 
 
 
-//$chroma-grid-mobile-first: false;
+//
+// let the framework create only those files you need
+//
 
-//$chroma-grid-scaffolding: false;
-//$chroma-grid-modifier-scaffolding: false;
-//$chroma-grid-responsive-scaffolding: false;
+// $chroma-grid-scaffold-default			: false;
+// $chroma-grid-scaffold-modifier			: false;
+// $chroma-grid-scaffold-responsive		: false;
+// $chroma-grid-scaffold-utils				: false;
+// $chroma-grid-scaffold-utils-responsive	: false;
+// $chroma-grid-scaffold-debug				: true;
 
-// include basic grid files
-@import "layout.base";			// base classes and settings
-@import "../bower_components/sass-mq/mq"; // import sass-mq
+
+
+//
+// then include all files
+// 
+
+@import "layout.base";							// base classes and settings
+@import "../sass-mq/mq"; 						// import sass-mq
 @import "layout.grid.default";
 @import "layout.grid.modifier";
 @import "layout.grid.responsive";
-
-
-
-@import "chroma/debug.grid";
+@import "layout.utils";
+@import "layout.utils.responsive";
+@import "debug.grid";

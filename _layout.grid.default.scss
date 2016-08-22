@@ -48,11 +48,23 @@
 	@extend [class*="#{$chroma-grid-name-col}"] !optional;
 }
 
-// columns 2, 12
-@mixin chroma-column($current-column, $column-amount: $chroma-grid-amount) {
+// columns 2, 12, breakpoint
+@mixin chroma-column($current-column, $column-amount: $chroma-grid-amount, $breakpoint: false) {
 	$width: chroma-column-width($current-column, $column-amount);
-	width: $width;
-	*width:	$width - 0.0694%; // IE6 & IE7 Subpixel-Fix
+	@if ($breakpoint == false) {
+		width: $width;
+		*width:	$width - 0.0694%; // IE6 & IE7 Subpixel-Fix	
+	} @else {
+		@if mixin-exists(at) {
+			@include at($breakpoint) {
+				width: $width;
+				*width:	$width - 0.0694%; // IE6 & IE7 Subpixel-Fix	
+			}
+		} @else {
+		    @warn "Columns with breakpoints need the grid.responsive file.";
+		}
+		
+	}
 	@content;
 }
 
@@ -153,7 +165,7 @@
 }
 
 // generic column
-[class*="#{$chroma-grid-name-col}"] {
+[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
 	padding-left: $chroma-grid-gutter;
 	padding-right: $chroma-grid-gutter;
 	> .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {

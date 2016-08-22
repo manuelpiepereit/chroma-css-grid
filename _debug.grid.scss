@@ -9,28 +9,24 @@
 	}
 
 	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-
-	[class*="#{$chroma-grid-name-col}"] {
 		background-color: rgba(150, 150, 150, 0.05);
 	}
 
-
-
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
+		background-color: rgba(0, 0, 150, 0.05);
+		border: 1px solid rgba(0, 0, 150, 0.05);
+	}
 
 	.cell {
 		background-color: rgba(0, 0, 150, 0.05);
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
 		border-radius: 3px;
-		border: 1px solid rgba(0, 0, 150, 0.1);	
+		border: 1px solid rgba(0, 0, 0, 0.05);
 	}
 
-	.focus {
-		&[class*="cols"],
-		&.cell {
-			background: red;
-			color: white;	
-		}
+	.debug,
+	.\@todo {
+		box-shadow: 0 0 6px 3px rgba(255,115,0, 1) !important;
 	}
 }

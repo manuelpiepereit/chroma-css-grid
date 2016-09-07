@@ -1,0 +1,204 @@
+
+.debug,
+.\@todo {
+	box-shadow: 0 0 6px 3px rgba(255,115,0, 1) !important;
+}
+
+section {
+	// .#{$chroma-grid-namespace}#{$chroma-grid-name-container},
+	// .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+	// 	background-color: rgba(150, 150, 150, 0.05);
+	// }
+
+	// .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+	// 	background-color: rgba(150, 150, 150, 0.05);
+	// }
+
+	// [class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
+	// 	background-color: rgba(0, 0, 150, 0.05);
+	// 	border: 1px solid rgba(0, 0, 150, 0.05);
+	// }
+
+	
+}
+
+
+body {
+	background: $c-bg;
+	color: $c;
+	font-size: 16px;
+	line-height: 1.4em;
+	font-family: helvetica, verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	margin-bottom: 30px;
+	background: rgba(0,0,0,0.05);
+	.description {
+		height: auto;
+		@include at(lg) {
+			min-height: 300px;
+			height: 30vh;
+		}
+		.row {
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		.row:last-child() {
+			text-align: center;
+		}	
+	}
+	.hero {
+		background: $c-em;
+		
+		padding: 50px 20px;
+		text-align: center;
+
+		p {
+			margin: 0;
+		}
+		h1 {
+			margin: 0 0 10px;
+			font-size: 2em;
+			line-height: 1em;
+			transition: font-size 0.5s ease;
+			&:before {
+				display: none;
+				content: '';
+			}
+		}
+
+		@include at(lg) {
+			min-height: 300px;
+			height: 50vh;
+			h1 {
+				font-size: 7em;
+			}
+		}
+	}
+	.container--max-height {
+		height: 100%;
+		.row,
+		[class*="cols"] {
+			height: 100%;
+		}
+		.v-center {
+			display: table;
+			width: 100%;
+			height: 100%;
+			&__inner {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+footer {
+	background: $c-em;
+	padding: 30px 0 50px;
+	margin-top: 30px;
+	font-size: 12px;
+	a {
+		color: darken($c, 100%);
+		text-decoration: underline;
+	}
+}
+
+
+
+#nav-pre {
+	height: 1px;
+	width: 100%;
+	overflow: hidden;
+	display: block;
+}
+nav {
+	font-size: 0.85em;
+	display: block;
+	position: relative;
+	top: 20px;
+	border-left: 1px solid $c-em;
+	padding: 10px 0;
+	overflow: scroll;
+	background: rgba($c-bg, 0.9);
+	&.fixed {
+		position: fixed;
+	}
+	a {
+		color: $c;
+		text-decoration: none;
+		display: block;
+		padding-left: 10px;
+		border-left: 2px solid transparent;
+		&:focus,
+		&:hover,
+		&:active {
+			color: $c-em;
+			border-color: $c-em;
+		}
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		ul {
+			margin-bottom: 10px;
+			opacity: $light;
+			li {
+				//padding-left: 10px;
+				a {
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+
+.content-wrapper {
+	> .row:not(:first-child()) {
+		padding-top: 30px;
+		margin-top: 90px;
+		border-top: 1px solid $c-em;
+	}
+}
+
+
+
+.example {
+	font-family: monospace;
+	font-size: 12px;
+
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
+		background-color: rgba(0, 0, 150, 0.02);
+		border: 1px solid rgba(0, 0, 150, 0.02);
+	}
+
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] .cell {
+		background-color: rgba(0, 0, 150, 0.05);
+		border: 1px solid rgba(0, 0, 150, 0.05);
+		border-radius: 1px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding: 10px 0;
+		white-space: nowrap;
+	}
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] .row [class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
+		background-color: rgba(0, 0, 150, 0.1);
+	}
+	
+
+	&.container {
+		background: white;
+		padding: 0px 10px;
+	    border: 1px solid #e0e0e0;
+	    border-radius: 3px;
+	}
+	.row {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}

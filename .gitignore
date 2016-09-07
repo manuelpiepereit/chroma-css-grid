@@ -1,0 +1,6 @@
+.DS_Store
+.sass-cache/**/*
+*.scssc
+*.sh
+bower_components
+node_modules

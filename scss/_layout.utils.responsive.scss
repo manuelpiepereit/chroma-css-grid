@@ -67,6 +67,9 @@
         .show#{$chroma-breakpoint-delimiter}#{$_mq} {
             @extend .hide;
         }
+        .visible#{$chroma-breakpoint-delimiter}#{$_mq} {
+            @extend .invisible;
+        }
         @each $_display in $chroma-visible-display {
             .show-#{$_display}#{$chroma-breakpoint-delimiter}#{$_mq} {
                 @extend .hide;

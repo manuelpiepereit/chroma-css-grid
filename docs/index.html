@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+	<meta http-equiv="content-language" content="en">
+
+	<title>ChromaCSS Grid Framework</title>
+	<meta name="author" content="Manuel Piepereit">
+	<meta name="publisher" content="Neonpastell GmbH">
+	<meta name="copyright" content="© 2016, Neonpastell GmbH, Augsburg">
+	<meta name="description" content="A highly versatile css grid framework for simple but customizable web development.">
+	
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+	<header>
+		<div class="hero">
+			<div class="container container--max-height">
+				<div class="row">
+					<div class="cols-8 cols--center">
+						<div class="v-center">
+							<div class="v-center__inner">
+								<h1>ChromaCSS</h1>
+								<p>A highly versatile css grid framework for simple but customizable web development.</p>
+								<p>@version: 2.3.0</p>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container description">
+			<div class="row">
+				<div class="cols-full">Why another grid framework? Well, because...</div>
+			</div>
+			<div class="row">
+				<div class="cols-12 cols-4@lg">
+					<h2>simple &amp; minimal</h2>
+					<p>Like bigger Frameworks you can simply include the css file and are ready to go. Or switch off the default scaffolding and use just those SASS mixins you really need.</p>
+				</div>
+				<div class="cols-12 cols-4@lg">
+					<h2>modular &amp; customizable</h2>
+					<p>Import only those partials you need and customize the grid to your own need. With an individual column amount, maximum site width and custom media query breakpoints.</p>
+				</div>
+				<div class="cols-12 cols-4@lg">
+					<h2>BEM &amp; SASS</h2>
+					<p>We're using BEM-Syntax where needed.</p>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+
+		<div class="row">
+			<div class="cols-2 cols--right show@lg">
+				<div id="nav-pre">chroma css</div>
+				<nav id="nav">
+					<ul>
+						<li><a href="#getting-started">getting-started</a>
+							<ul>
+								<li><a href="#kickstart">kickstart</a></li>
+							</ul>
+						</li>
+						<li><a href="#grid-base">grid</a>
+							<ul>
+								<li><a href="#grid-base">base</a></li>
+								<li><a href="#grid-modifier">modifier</a></li>
+								<li><a href="#grid-responsive">responsive</a></li>
+							</ul>
+						</li>
+						<li><a href="#utils">grid.utils</a>
+							<ul>
+								<li><a href="#utils">hide/show</a></li>
+								<li><a href="#utils-print">print</a></li>
+							</ul>
+						</li>
+						<li><a href="#grid-settings">settings</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="cols-12 cols-9@lg cols--left content-wrapper">
+				<section class="row" id="getting-started">
+					<div class="cols-full">
+						<h1>getting started <!-- <span class="byline">bower install chroma-css</span> --></h1>
+						<p>these docs are not at great length, but should give you an idea about what you are dealing with.</p>
+						
+						<h2>requirements</h2>
+						<p>At least some knowledge about html and css. But the following things would be really good.</p>
+						<ol>
+							<li>Bower</li>
+							<li>Gulp/Grunt/Webpack...</li>
+						</ol>
+
+						<h2>install</h2>
+						<ol>
+							<li>download/clone this repository</li>
+							<li>install bower package
+								<code>bower install</code>
+							</li>
+							<li><a href="#kickstart">decide how you want</a> to use ChromaCSS</li>
+						</ol>
+
+						<h2 id="kickstart">kickstart</h2>
+						<p>The simplest way to use this framework is to just include the minified CSS file and start working.</p>
+						<pre><code><span class="tag"><</span>link rel="stylesheet" <span class="name">href</span><span class="value">="{path-to-chroma-css}/css/chroma.min.css"</span><span class="tag">></span></code></pre>
+
+						<p>For a more profound experience and to customize the grid system you first need to set your own settings and then simply import all SCSS files at once.</p>
+						<pre><code>@import 'your-custom-settings';
+@import '{path-to-chroma-css}/scss/all';</code></pre>
+					</div>
+				</section>
+
+
+
+				<section class="row" id="grid-base">
+					<div class="cols-full">
+						<h1>grid <span class="byline">_layout.grid.base.scss</span></h1>
+						<p>So, if you want to, you also can import only those files you really need. But as this is the base of the ChromaCSS grid system, you'll at least need these three imports:</p>
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'grid.settings';
+@import '[path_to_bower_components]/sass-mq/mq';
+@import 'layout.grid.base';</code></pre>
+						<p>You always have to define your own grid settings before importing the <code>grid.settings</code> file.</p>
+						<pre><code>// settings
+$chroma-grid-amount           : 12;     <span class="comment">// number of total columns</span>
+$chroma-grid-gutter           : 10px;   <span class="comment">// gutter between columns</span>
+$chroma-grid-max-width        : null;   <span class="comment">// maximum container width in px</span>
+
+$chroma-is-static-layout      : false;  <span class="comment">// static container layout with fixed width</span>
+
+$chroma-grid-scaffold-default : true; <span class="comment">// creates default grid classes</span></code></pre>
+
+
+						<h2>usage &amp; mixins</h2>
+						<h3>css selector naming scheme</h3>
+						<pre><code>
+.cols-{column}               // where {column} is the span you'd like
+.cols-{column}[/fraction]    // by default the most important (1/2, 1/3, 1/4, 1/1) fractions are created</code></pre>
+
+						<h3>mixins</h3>
+						<pre><code>
+@include chroma-container([$max-width])    <span class="comment">// defaults to $chroma-grid-max-width.</span>
+                                           <span class="comment">// set to 'null' if you want full width</span>
+@include chroma-row()                      <span class="comment">// creates a row element</span>
+
+@include chroma-column($column-amount, {$total-columns, $breakpoint}); <span class="comment">// creates column
+or</span>
+@include chroma-columns(...)               <span class="comment">// as an alias</span>
+
+@include chroma-clearfix()                 <span class="comment">// the usual suspect</span></code></pre>
+
+
+					</div>
+
+
+					<div class="cols-full">
+						<h2>examples</h2>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-1"><div class="cell">.cols-1</div></div>
+								<div class="cols-2"><div class="cell">.cols-2</div></div>
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+								<div class="cols-4"><div class="cell">.cols-4</div></div>
+								<div class="cols-2"><div class="cell">.cols-2</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-6"><div class="cell">.cols-6</div></div>
+								<div class="cols-6"><div class="cell">.cols-6</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-3"><div class="cell">.cols-3</div></div>
+								<div class="cols-9"><div class="cell">.cols-9</div></div>
+							</section>
+						</div>
+						<h3>nested grid</h3>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-6">
+									<div class="cell">.cols-6</div>
+									<div class="row">
+										<div class="cols-8">
+											<div class="cell">.cols-8</div>
+											<div class="row">
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+												<div class="cols-4"><div class="cell">.cols-4</div></div>
+												<div class="cols-4"><div class="cell">.cols-4</div></div>
+												<div class="cols-4"><div class="cell">.cols-4</div></div>
+											</div>
+										</div>
+										<div class="cols-4">
+											<div class="cell">.cols-4</div>
+										</div>
+									</div>
+								</div>
+								<div class="cols-6">
+									<div class="cell">.cols-6</div>
+									<div class="row">
+										<div class="cols-4"><div class="cell">.cols-4</div></div>
+										<div class="cols-4"><div class="cell">.cols-4</div></div>
+										<div class="cols-4">
+											<div class="cell">.cols-4</div>
+											<div class="row">
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+												<div class="cols-6"><div class="cell">.cols-6</div></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+
+
+
+
+
+
+				<section class="row" id="grid-modifier">
+					<div class="cols-full">
+						<h1>grid.modifier <span class="byline">_layout.grid.modifier.scss</span></h1>
+
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'layout.grid.modifier';
+
+$chroma-grid-scaffold-modifier : true;</code></pre>
+
+						<h2>usage &amp; mixins</h2>
+						
+						<h3>column shift</h3>
+						<p>offset and rearange columns</p>
+						<h4>css selector naming scheme</h4>
+						<pre><code>.cols-{column}--offset
+
+.cols-{column}--push
+
+.cols-{column}--pull</code></pre>
+
+						<h4>mixins</h4>
+						<pre><code>@include chroma-column-offset($column, [$total-columns]);
+
+@include chroma-column-push($column, [$total-columns]);
+
+@include chroma-column-pull($column, [$total-columns]);</code></pre>
+
+						<h3>column align</h3>
+						<p>used to align columns within a row element.</p>
+						<h4>css selector naming scheme</h4>
+						<pre><code>.cols--left
+
+.cols--center
+
+.cols--right</code></pre>
+
+						<h4>mixins</h4>
+						<pre><code>@include chroma-column-left();
+
+@include chroma-column-center();
+
+@include chroma-column-right();</code></pre>
+
+						<h3>column bleeding</h3>
+						<p>get rid of the column gutter</p>
+						<h4>css selector naming scheme</h4>
+						<pre><code>.cols--bleed</code></pre>
+
+						<h4>mixins</h4>
+						<pre><code>@include chroma-column-bleed();</code></pre>
+
+						<h2>examples</h2>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-3 cols-3--push" data-mixin="chroma-column-push(3)"><div class="cell">.cols-3--push</div></div>
+								<div class="cols-3 cols-3--pull" data-mixin="chroma-column-pull(3)"><div class="cell">.cols-3--pull</div></div>
+								<div class="cols-3 cols-3--offset" data-mixin="chroma-column-offset(3)"><div class="cell">.cols-3--offset</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-4 cols--left" data-mixin="chroma-column-left()"><div class="cell">.cols--left</div></div>
+								<div class="cols-4 cols--right" data-mixin="chroma-column-right()"><div class="cell">.cols--right</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-4 cols--center" data-mixin="chroma-column-center()"><div class="cell">.cols--center</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-4 cols--bleed" data-mixin="chroma-column-bleed()"><div class="cell">.cols--bleed</div></div>
+								<div class="cols-4 cols--bleed" data-mixin="chroma-column-bleed()"><div class="cell">.cols--bleed</div></div>
+								<div class="cols-4 cols--bleed" data-mixin="chroma-column-bleed()"><div class="cell">.cols--bleed</div></div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+				<section class="row" id="grid-responsive">
+					<div class="cols-full">
+						<h1>grid.responsive <span class="byline">_layout.grid.responsive.scss</span></h1>
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'layout.grid.responsive';
+
+// settings
+$chroma-is-mobile-first : true;   <span class="comment">// if layout is mobile first</span>
+$chroma-breakpoints     : (       <span class="comment">// list of breakpoints</span>
+		sm:  320px, 
+		md:  740px, 
+		lg:  980px, 
+		xl:  1300px
+	);
+$chroma-grid-scaffold-responsive : true;</code></pre>
+
+						<h2>usage &amp; mixins</h2>
+						<h3>css selector naming scheme</h3>
+						<pre><code>.cols-{column}@{breakpoint}
+
+.cols-{column}--{modifier}@{breakpoint}</code></pre>
+						<pre><code><span class="tag"><</span>div <span class="name">class</span><span class="value">="cols-12 cols-6@md cols-3@lg"</span><span class="tag">></span>
+
+<span class="tag"><</span>div <span class="name">class</span><span class="value">="cols-12 cols-9@lg cols-3--push@lg"</span><span class="tag">></span>
+</code></pre>
+						
+						<h3>mixins</h3>
+						<p>We are using a wrapper mixin for sass-mq. It just takes one key of your breakpoints and uses the <code>$chroma-is-mobile-first</code> variable to determine whether to use <code>$from</code> or <code>$until</code>. Its' just a little bit less code to write.</p>
+						<pre><code>@include chroma-media($breakpoint) { @content };
+
+<span class="comment">// alias for chroma-media($breakoint);</span>
+@include at($breakpoint) { @content };
+
+<span class="comment">// or use sass-mq</span>
+@include sass-mq($from, $until, $and, $media-type) { @content };
+						</code></pre>
+
+						<pre><code>.sidebar {
+  @include at(md) {
+    @include chroma-column(3);
+    @include chroma-column-right();
+    display: block;
+  }
+}</code></pre>
+						
+						
+
+						<h2>examples</h2>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-12 cols-6@md cols-3@lg"><div class="cell">.cols-12 6@md 3@lg</div></div>
+								<div class="cols-12 cols-6@md cols-3@lg"><div class="cell">.cols-12 6@md 3@lg</div></div>
+								<div class="cols-12 cols-6@md cols-3@lg"><div class="cell">.cols-12 6@md 3@lg</div></div>
+								<div class="cols-12 cols-6@md cols-3@lg"><div class="cell">.cols-12 6@md 3@lg</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+								<div class="cols-12 cols-6@sm cols-4@md cols-3@lg cols-2@xl"><div class="cell">.cols-12 <br>6@sm @4md<br> 3@lg 2@xl</div></div>
+							</section>
+						</div>
+						<h3>responsive modifier</h3>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-12 cols-9@lg cols-3--push@lg"><div class="cell">push@lg</div></div>
+								<div class="cols-12 cols-3@lg cols-9--pull@lg"><div class="cell">pull@lg</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-12 cols-4@lg cols--right@lg"><div class="cell">right@lg</div></div>
+								<div class="cols-12 cols-4@lg cols--left@lg"><div class="cell">left@lg</div></div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+
+				<section class="row" id="utils">
+					<div class="cols-full">
+						<h1>utils <span class="byline">_layout.utils.scss</span></h1>
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'layout.utils';
+@import 'layout.utils.responsive';</code></pre>
+
+						<h2>usage &amp; mixins</h2>
+						<h3>show or hide elements</h3>
+						<p>Different utils to show or hide elements.</p>
+						<h4>css selectors naming scheme</h4>
+						<pre><code>.hide@{breakpoint}
+
+.show-{display}@{breakpoint} 	<span class="comment">// css display types: block | inline | inline-block</span>
+
+.invisible@{breakpoint}
+
+.visible@{breakpoint}</code></pre>
+
+						<h4>mixins</h4>
+						<pre><code>@include chroma-hide({$breakpoint});
+
+@include chroma-show({$display, $breakpoint});   <span class="comment">// css display types: block | inline | table-cell ...</span></code></pre>
+
+						<h2>examples</h2>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-4 hide@md"><div class="cell">.hide@md</div></div>
+								<div class="cols-4 show@md"><div class="cell">.show@md</div></div>
+								<div class="cols-4 visible@md"><div class="cell">.visible@md</div></div>
+								<div class="cols-4 invisible@md"><div class="cell">.invisible@md</div></div>
+								<div class="cols-4 show-block@md"><div class="cell">.show-block@md</div></div>
+								<div class="cols-4 show-inline@md"><div class="cell">.show-inline@md</div></div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+
+
+
+
+				<section class="row" id="utils-print">
+					<div class="cols-full">
+						<h1>utils.print <span class="byline">_layout.utils.print.scss</span></h1>
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'layout.utils.print';
+
+$chroma-grid-scaffold-utils-print: true; <span class="comment">// creates default print util classes</span></code></pre>
+
+						<h2>usage &amp; mixins</h2>
+						<h3>css selectors</h3>
+						<pre><code>.hide-print
+
+.show-print-{display}    <span class="comment">// css display types: block | inline | inline-block</span></code></pre>
+
+						<h2>examples</h2>
+						<div class="container example">
+							<section class="row">
+								<div class="cols-12 show-print">.show-print</div>
+								<div class="cols-12 hide-print">.hide-print</div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+
+
+
+
+
+
+
+				<section class="row" id="grid-settings">
+					<div class="cols-full">
+						<h1>settings <span class="byline">_grid.settings.scss</span></h1>
+						<p>All default settings you can play with:</p>
+						<pre><code><span class="comment">// grid settings</span>
+$chroma-grid-amount       : 12;       <span class="comment">// number of total columns</span>
+$chroma-grid-gutter       : 10px;     <span class="comment">// gutter between columns</span>
+$chroma-grid-max-width    : null;     <span class="comment">// maximum container width</span>
+
+$chroma-is-mobile-first   : true;     <span class="comment">// if layout is mobile first</span>
+$chroma-is-static-layout  : false;    <span class="comment">// sets a static container layout with fixed width</span>
+
+$chroma-breakpoints : (               <span class="comment">// default breakpoints for responsive views</span>
+                        sm:  320px,
+                        md:  740px,
+                        lg:  980px,
+                        xl:  1300px,
+                      ) 
+$mq-breakpoints: $chroma-breakpoints;  <span class="comment">// overwrite sass-mq variable. this is important!</span>
+
+
+<span class="comment">// class namings</span>
+$chroma-grid-namespace        : "";          <span class="comment">// custom namespace prefix</span>
+$chroma-grid-name-container   : "container"; <span class="comment">// custom container name</span>
+$chroma-grid-name-row         : "row";       <span class="comment">// custom row name</span>
+$chroma-grid-name-col         : "cols";      <span class="comment">// custom column name</span>
+
+$chroma-breakpoint-delimiter  : \@;          <span class="comment">// how breakpoints are seperated in classes</span>
+$chroma-column-delimiter      : false;       <span class="comment">// additional classes for columns, 
+                                             // eg: cols-5/12 or cols-5-of-12</span>
+
+<span class="comment">// scaffold default classes</span>
+$chroma-grid-scaffold-default          : true;     <span class="comment">// creates default grid classes</span>
+$chroma-grid-scaffold-modifier         : true;     <span class="comment">// creates default grid modifier classes</span>
+$chroma-grid-scaffold-responsive       : true;     <span class="comment">// creates default grid responsive classes</span>
+$chroma-grid-scaffold-utils            : true;     <span class="comment">// creates default util classes</span>
+$chroma-grid-scaffold-utils-responsive : true;     <span class="comment">// creates default responsive util classes</span>
+$chroma-grid-scaffold-utils-print      : true;     <span class="comment">// creates default print util classes</span>
+$chroma-grid-scaffold-debug            : false;    <span class="comment">// creates some debugging classes</span>
+</code></pre>
+
+					</div>
+				</section>
+
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="cols-12">created 2016 by <a href="http://www.neonpastell.de" target="_blank">Neonpastell GmbH</a>, <a href="http://www.manoufacture.net">Manuel Piepereit</a></div>
+			</div>
+		</div>
+	</footer>
+
+	<script type="text/javascript">
+		window.onscroll = function() {
+			el = document.getElementById('nav');
+			if (findPos('nav-pre') < 0) {
+				el.style.position = "fixed";
+			} else {
+				el.style.position = 'relative';
+			}
+		};
+
+		function findPos(id) {
+		    var node = document.getElementById(id); 	
+		    var curtop = 0;
+		    var curtopscroll = 0;
+		    if (node.offsetParent) {
+		        do {
+		            curtop += node.offsetTop;
+		            curtopscroll += node.offsetParent ? node.offsetParent.scrollTop : 0;
+		        } while (node = node.offsetParent);
+		        return curtop - curtopscroll;
+		    }
+		}
+	</script>
+
+</body>
+</html>

@@ -32,11 +32,6 @@
         }   
     }
 }
-// alias
-@mixin chroma-visible($args...) {
-    @include chroma-show($args...) { @content };
-}
-
 
 
 

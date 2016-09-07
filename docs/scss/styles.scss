@@ -1,5 +1,20 @@
 @import "vars.grid";
-@import "../../scss/all";
+// import default grid settings
+@import "../../scss/grid.settings";						
+
+// import sass-mq
+@import "../../bower_components/sass-mq/mq";
+
+// import all other grid files
+@import "../../scss/layout.grid.base";					
+@import "../../scss/layout.grid.modifier";
+@import "../../scss/layout.grid.responsive";
+@import "../../scss/layout.utils";
+@import "../../scss/layout.utils.responsive";
+@import "../../scss/layout.utils.print";
+
+// import debug helper classes
+@import "../../scss/debug.grid";
 
 @import "vars";
 @import "layout";

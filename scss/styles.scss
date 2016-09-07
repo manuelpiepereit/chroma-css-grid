@@ -1,1 +1,16 @@
-@import "all";
+// import default grid settings
+@import "grid.settings";						
+
+// import sass-mq
+@import "../bower_components/sass-mq/mq";
+
+// import all other grid files
+@import "layout.grid.base";					
+@import "layout.grid.modifier";
+@import "layout.grid.responsive";
+@import "layout.utils";
+@import "layout.utils.responsive";
+@import "layout.utils.print";
+
+// import debug helper classes
+@import "debug.grid";

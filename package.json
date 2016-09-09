@@ -1,0 +1,49 @@
+{
+  "name": "chroma-css",
+  "version": "2.3.1",
+  "description": "A highly versatile css grid framework for simple but customizable web development.",
+  "homepage": "https://bitbucket.org/neonpastell/chroma-css.git",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/neonpastell/chroma-css.git"
+  },
+  "author": {
+    "name": "Neonpastell GmbH",
+    "email": "info@neonpastell.de",
+    "url": "http://www.neonpastell.de"
+  },
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "readme": "# ",
+  "readmeFilename": "README.md",
+  "private": true,
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-sass": "~2.3.2",
+    "gulp-sourcemaps": "~1.6.0",
+    "gulp-autoprefixer": "~3.1.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-uglify": "~2.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-clean-css": "~2.0.12",
+    "gulp-header": "~1.8.7",
+    "gulp-bump": "~2.2.0",
+    "gulp-load-plugins": "~1.2.4",
+    "gulp-livereload": "~3.8.0",
+    "gulp-watch": "~4.3.9",
+    "gulp-notify": "~2.2.0",
+    "gulp-plumber": "~1.1.0",
+    "browser-sync": "~2.14.0",
+    "dateformat": "~1.0.12",
+    "del": "~2.2.1",
+    "run-sequence": "~1.2.2",
+    "gulp-sftp": "^0.1.5",
+    "gulp-rename": "^1.2.2"
+  },
+  "dependencies": {
+    
+  }
+}

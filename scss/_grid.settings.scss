@@ -10,6 +10,8 @@ $chroma-grid-max-width  		: null !default			// maximum container width
 
 $chroma-is-mobile-first 		: true !default;		// if layout is mobile first
 $chroma-is-static-layout 		: false !default; 		// sets a static container layout with fixed width
+$chroma-is-flexbox      		: false !default;		// if flex box model is used
+$chroma-is-bem-syntax 			: false !default;		// if BEM is used in row__col classes
 
 $chroma-breakpoints 			: ( 					// default breakpoints for responsive views
 								    sm:  320px,
@@ -35,6 +37,7 @@ $chroma-column-delimiter 		: false !default; 		// additional classes for columns
 $chroma-grid-scaffold-default			: true !default;		// creates default grid classes
 $chroma-grid-scaffold-modifier			: true !default;		// creates default grid modifier classes
 $chroma-grid-scaffold-responsive		: true !default;		// creates default grid responsive classes
+$chroma-grid-scaffold-flexbox           : true !default;        // creates default grid flexbox classes
 $chroma-grid-scaffold-utils				: true !default;		// creates default util classes
 $chroma-grid-scaffold-utils-responsive	: true !default;		// creates default responsive util classes
 $chroma-grid-scaffold-utils-print		: true !default;		// creates default print util classes

@@ -6,7 +6,8 @@
 @import "../../bower_components/sass-mq/mq";
 
 // import all other grid files
-@import "../../scss/layout.grid.base";					
+@import "../../scss/layout.grid.base";
+@import "../../scss/layout.grid.flexbox";			
 @import "../../scss/layout.grid.modifier";
 @import "../../scss/layout.grid.responsive";
 @import "../../scss/layout.utils";

@@ -1,0 +1,108 @@
+/*
+*	Chroma CSS grid.flexbox
+*/
+
+//
+//	mixins public
+//
+
+@mixin chroma-column-flex($grow: 1) {
+	flex-grow: $grow;
+}
+
+
+
+
+
+// flex-row modifier
+$chroma-flex-grid-directions : (reverse: row-reverse, column: column, colum-reverse: column-reverse);
+@mixin chroma-flex-grid-direction($direction) {
+	flex-direction: $direction;
+}
+
+
+// flex-column modifier
+$chroma-flex-align-self : (bottom: flex-end, middle: center, baseline: baseline, stretch: stretch);
+@mixin chroma-flex-align-self($direction) {
+	align-self: $direction;
+}
+
+@mixin chroma-flex-column-order($order) {
+	order: $order;
+}
+
+
+//
+//	mixins for default classes
+//
+
+
+@mixin chroma-create-flex-direction($breakpoint: false) {
+	@if ($breakpoint == false) {
+		@each $k, $v in $chroma-flex-grid-directions {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k} {
+				flex-direction: $v; 
+			}
+		}
+	} @else {
+		@each $k, $v in $chroma-flex-grid-directions {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				flex-direction: $v; 
+			}
+		}
+	}
+}
+
+
+//
+//	scaffolding
+//
+
+@if ($chroma-grid-scaffold-flexbox == true and $chroma-is-flexbox == true) {
+
+	// row direction modifier
+	@include chroma-create-flex-direction();
+
+
+
+	// column aling-self
+	@each $k, $v in $chroma-flex-align-self {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--#{$k} {
+			self-align: $v; 
+		}
+	}
+
+
+	// column order
+	@for $i from 1 through 3 {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--order-#{$i} {
+			@include chroma-flex-column-order($i);	
+		}
+	}
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--first {
+		@include chroma-flex-column-order(-1);
+	}
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--last {
+		@include chroma-flex-column-order(100);	
+	}
+
+
+
+	
+}
+
+
+@if ($chroma-grid-scaffold-flexbox == true AND $chroma-grid-scaffold-responsive == true) {
+	// row direction modifier
+	@each $_mq, $_px in $chroma-breakpoints {
+        @if ($chroma-is-mobile-first == true) {    
+            @include mq($from: $_mq) {
+                @include chroma-create-flex-direction($_mq);
+            }
+        } @else {        
+            @include mq($until: $_mq) {
+            	@include chroma-create-flex-direction($_mq);
+            }
+        }
+    }
+}

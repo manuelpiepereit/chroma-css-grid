@@ -13,47 +13,10 @@
 @import "layout.grid.base";					
 @import "layout.grid.modifier";
 @import "layout.grid.responsive";
+@import "layout.grid.flexbox";
 @import "layout.utils";
 @import "layout.utils.responsive";
 @import "layout.utils.print";
 
 // import debug helper classes
 @import "debug.grid";
-
-
-
-
-
-
-
-//
-// define your own settings
-// 
-
-// $chroma-grid-amount			: 12;
-// $chroma-grid-gutter			: 10px;
-// $chroma-grid-max-width		: 1080px;
-
-// $chroma-is-mobile-first		: false;
-
-// $chroma-breakpoints			: (
-// 							    SD:  740px,
-// 							    HD:  1920px,
-// 							);
-
-
-
-
-
-
-//
-// let the framework create only those files you need
-//
-
-// $chroma-grid-scaffold-default			: false;
-// $chroma-grid-scaffold-modifier			: false;
-//$chroma-grid-scaffold-responsive		: false;
-//$chroma-grid-scaffold-utils				: false;
-//$chroma-grid-scaffold-utils-responsive	: false;
-// $chroma-grid-scaffold-utils-print			: false;
-//$chroma-grid-scaffold-debug				: true;

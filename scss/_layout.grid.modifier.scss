@@ -31,16 +31,26 @@
 @mixin chroma-column-center() {
 	margin-left: auto;
 	margin-right: auto;
-	float: none;
-	clear: both;
+	@if ($chroma-is-flexbox == false) {
+		float: none;
+		clear: both;
+	}
 }
 
 @mixin chroma-column-left() {
-	float: left;
+	@if ($chroma-is-flexbox) {
+		margin-right: auto;
+	} @else {
+		float: left;
+	}
 }
 
 @mixin chroma-column-right() {
-	float: right;
+	@if ($chroma-is-flexbox) {
+		margin-left: auto;
+	} @else {
+		float: right;
+	}
 }
 
 @mixin chroma-column-bleed() {

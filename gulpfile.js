@@ -21,7 +21,7 @@ gulp.task('css:docs', function() {
         .pipe(plugins.sass( {outputStyle:'expanded', indentWidth:4} ))
         .pipe(plugins.autoprefixer('last 2 version'))
         .pipe(plugins.header(banner, { pkg : pkg }))
-        .pipe(plugins.cleanCss({compatibility: 'ie8'}))
+        //.pipe(plugins.cleanCss({compatibility: 'ie8'}))
         .pipe(gulp.dest('./docs/css/'))
         .pipe(plugins.notify({ message: 'docs.css compiled' }));
 });

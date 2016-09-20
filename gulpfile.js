@@ -33,7 +33,7 @@ gulp.task('css:dev', function() {
         .pipe(plugins.sass( {outputStyle:'expanded', indentWidth:4} ))
         .pipe(plugins.autoprefixer('last 6 version'))
         .pipe(plugins.header(banner, { pkg : pkg }))
-        .pipe(plugins.rename('chroma.css'))
+        //.pipe(plugins.rename(function(path){path.basename = "chroma"}))
         .pipe(gulp.dest('./css/'))
         .pipe(plugins.notify({ message: 'chroma.css compiled' }));
 });
@@ -44,7 +44,7 @@ gulp.task('css:dist', function() {
         .pipe(plugins.autoprefixer('last 6 version'))
         .pipe(plugins.header(banner, { pkg : pkg }))
         .pipe(plugins.cleanCss({compatibility: 'ie8'}))
-        .pipe(plugins.rename('chroma.min.css'))
+        .pipe(plugins.rename(function(path){path.basename += ".min"}))
         .pipe(gulp.dest('./css/'))
         .pipe(plugins.notify({ message: 'chroma.min.css compiled' }));
 });

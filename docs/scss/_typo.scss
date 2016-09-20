@@ -56,11 +56,16 @@ pre {
     }
     code {
     	font-size: 12px;
+    	background: transparent;
+    	padding: 0;
     }
 }
 code {
 	color: black;
 	font-family: monospace;
+	background: rgba(0,0,0,0.05);
+	border-radius: 2px;
+	padding: 2px 4px;
 }
 
 
@@ -92,3 +97,35 @@ code {
 		color: blue;
 	}
 }
+
+
+table {
+	width: 100%;
+	table-layout: fixed;
+	margin-bottom: 20px;
+	th, td {
+		text-align: center;	
+		font-weight: normal;
+		background: rgba(0,0,0,0.05);
+		padding: 10px;
+	}
+	tr:first-child>th:first-child {
+		background: transparent;
+	}
+	th:first-child {
+		text-align: left;
+	}
+	.is-shown {
+		background-color: rgba($c-em, 0.4);
+	}
+	.is-hidden {
+		opacity: $light;
+	}
+}
+
+
+
+
+
+
+

@@ -79,7 +79,7 @@
 @mixin chroma-create-grid-responsive($breakpoint, $total-columns: $chroma-grid-amount) {
     @for $i from 1 through $chroma-grid-amount {
         .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
-            @include chroma-column($i, $chroma-grid-amount);
+            @include chroma-columns($i, $chroma-grid-amount);
         }
         @if ($chroma-column-delimiter) {
             .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$total-columns}#{$chroma-breakpoint-delimiter}#{$breakpoint} {

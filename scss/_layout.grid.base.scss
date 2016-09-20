@@ -59,16 +59,16 @@
 
 
 // generic column class
-@mixin chroma-column-generic() {
+@mixin chroma-column() {
 	@if ($chroma-is-flexbox) {
-		@extend %generic-flex-column;
+		@extend %flex-column;
 	} @else {
-		@extend %generic-column;
+		@extend %column;
 	}
 }
 
 // columns 2, 12, breakpoint
-@mixin chroma-column($current-column, $column-amount: $chroma-grid-amount, $breakpoint: false) {
+@mixin chroma-columns($current-column, $column-amount: $chroma-grid-amount, $breakpoint: false) {
 	$width: chroma-column-width($current-column, $column-amount);
 	
 	@if ($chroma-is-flexbox == false) {
@@ -92,12 +92,6 @@
 	}
 }
 
-// chroma-column alias
-@mixin chroma-columns($args...) {
-	@include chroma-column($args...) { @content };
-}
-
-
 
 
 
@@ -110,7 +104,7 @@
 @mixin chroma-create-column-classes($i, $total-columns: $chroma-grid-amount) {
 	
 	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i} {
-		@include chroma-column($i);
+		@include chroma-columns($i);
 	}
 	@if ($chroma-column-delimiter) {
 		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$total-columns} {
@@ -194,7 +188,7 @@
 	align-content: flex-start;
 }
 
-%generic-column {
+%column {
 	padding-left: $chroma-grid-gutter;
 	padding-right: $chroma-grid-gutter;
 	> .#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
@@ -205,7 +199,7 @@
 	display: block;
 }
 
-%generic-flex-column {
+%flex-column {
 	padding-left: $chroma-grid-gutter;
 	padding-right: $chroma-grid-gutter;
 	flex: 0 0 auto;
@@ -231,10 +225,10 @@
 	}
 	// generic column
 	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}-"] {
-		@include chroma-column-generic();
+		@include chroma-column();
 	}
 	@if ($chroma-is-flexbox) {
-		[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}-*"] {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-x {
 			flex-grow: 1;
 		}
 	}

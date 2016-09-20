@@ -185,11 +185,16 @@ nav {
 		margin-bottom: 10px;
 		padding: 10px 0;
 		white-space: nowrap;
+		min-height: 44px;
+		text-align: center;
 	}
 	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] .row [class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
 		background-color: rgba(0, 0, 150, 0.1);
 	}
 	
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] .cell.em {
+		background-color: rgba($c-em, 0.4);
+	}
 
 	&.container {
 		background: white;

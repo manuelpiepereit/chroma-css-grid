@@ -6,49 +6,170 @@
 //	mixins public
 //
 
-@mixin chroma-column-flex($grow: 1) {
-	flex-grow: $grow;
+// flex-row direction
+$chroma-row-directions : (reverse: row-reverse, column: column, column-reverse: column-reverse);
+@mixin chroma-row-direction($direction: row) {
+	@if ($direction == reverse) {
+		flex-direction: row-reverse;
+	} @else {
+		flex-direction: $direction;	
+	}
+}
+
+// flex-row alignment
+$chroma-row-align : (start, center, end, top, middle, bottom, around, between, stretch, baseline);
+@mixin chroma-row-align($alignment: start) {
+	@if ($alignment == start) {
+		justify-content: flex-start;
+	} @elseif ($alignment == center) {
+		justify-content: center;
+	} @elseif ($alignment == end) {
+		justify-content: flex-end;
+	} @elseif ($alignment == around) {
+		justify-content: space-around;
+	} @elseif ($alignment == between) {
+		justify-content: space-between;
+	} @elseif ($alignment == top) {
+		align-items: flex-start;
+	} @elseif ($alignment == middle) {
+		align-items: center;
+	} @elseif ($alignment == bottom) {
+		align-items: flex-end;
+	} @elseif ($alignment == stretch) {
+		align-items: stretch;
+	}  @elseif ($alignment == baseline) {
+		align-items: baseline;
+	} 
+}
+
+// flex column
+@mixin chroma-column-grow($ratio: 1) {
+	flex-grow: $ratio;
+}
+
+// ordering columns
+@mixin chroma-column-order($order: 1) {
+	order: $order;
+}
+@mixin chroma-column-first() {
+	order: -1;
+}
+@mixin chroma-column-last() {
+	order: 100;
 }
 
 
 
-
-
-// flex-row modifier
-$chroma-flex-grid-directions : (reverse: row-reverse, column: column, colum-reverse: column-reverse);
-@mixin chroma-flex-grid-direction($direction) {
-	flex-direction: $direction;
-}
 
 
 // flex-column modifier
-$chroma-flex-align-self : (bottom: flex-end, middle: center, baseline: baseline, stretch: stretch);
-@mixin chroma-flex-align-self($direction) {
-	align-self: $direction;
+$chroma-column-align : (top: flex-start, middle: center, bottom: flex-end, stretch: stretch, baseline: baseline);
+@mixin chroma-column-align($alignment: top) {
+	@if ($alignment == top) {
+		align-self: flex-start;
+	} @elseif ($alignment == middle) {
+		align-self: center;
+	} @elseif ($alignment == end) {
+		align-self: flex-end;
+	} @else {
+		align-self: $alignment;
+	} 
 }
 
-@mixin chroma-flex-column-order($order) {
-	order: $order;
-}
+
+
+
+
+
+
+
 
 
 //
 //	mixins for default classes
 //
-
-
-@mixin chroma-create-flex-direction($breakpoint: false) {
+@mixin chroma-create-flex-classes($breakpoint: false) {
 	@if ($breakpoint == false) {
-		@each $k, $v in $chroma-flex-grid-directions {
+		// flex-row direction
+		@each $k, $v in $chroma-row-directions {
 			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k} {
-				flex-direction: $v; 
+				@include chroma-row-direction($v);
 			}
 		}
-	} @else {
-		@each $k, $v in $chroma-flex-grid-directions {
-			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
-				flex-direction: $v; 
+
+		// flex-row alignment
+		@each $k in $chroma-row-align {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k} {
+				@include chroma-row-align($k);
 			}
+		}
+
+		// flex-column grow
+		@for $i from 1 through 4 {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-x--#{$i} {
+				flex-grow: $i;
+			}
+		}
+
+		// flex-column align
+		@each $k, $v in $chroma-column-align {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--#{$k} {
+				@include chroma-column-align($v);
+			}
+		}
+
+		// flex-column order
+		@for $i from 1 through 4 {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--order-#{$i} {
+				@include chroma-column-order($i);	
+			}
+		}
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--first {
+			@include chroma-column-first();
+		}
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--last {
+			@include chroma-column-last();
+		}
+	} @else {
+		// flex-row direction
+		@each $k, $v in $chroma-row-directions {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				@include chroma-row-direction($v);
+			}
+		}
+		
+		// flex-row alignment
+		@each $k in $chroma-row-align {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-row}--#{$k}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				@include chroma-row-align($k);
+			}
+		}
+
+		// flex-column grow
+		@for $i from 1 through 4 {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-x--#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				flex-grow: $i;
+			}
+		}
+
+		// flex-column align
+		@each $k, $v in $chroma-column-align {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--#{$k}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				@include chroma-column-align($v);
+			}
+		}
+
+		// flex-column order
+		@for $i from 1 through 4 {
+			.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--order-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+				@include chroma-column-order($i);	
+			}
+		}
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--first#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+			@include chroma-column-first();
+		}
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--last#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+			@include chroma-column-last();
 		}
 	}
 }
@@ -57,51 +178,21 @@ $chroma-flex-align-self : (bottom: flex-end, middle: center, baseline: baseline,
 //
 //	scaffolding
 //
-
+// normal classes
 @if ($chroma-grid-scaffold-flexbox == true and $chroma-is-flexbox == true) {
-
-	// row direction modifier
-	@include chroma-create-flex-direction();
-
-
-
-	// column aling-self
-	@each $k, $v in $chroma-flex-align-self {
-		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--#{$k} {
-			self-align: $v; 
-		}
-	}
-
-
-	// column order
-	@for $i from 1 through 3 {
-		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--order-#{$i} {
-			@include chroma-flex-column-order($i);	
-		}
-	}
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--first {
-		@include chroma-flex-column-order(-1);
-	}
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-col}--last {
-		@include chroma-flex-column-order(100);	
-	}
-
-
-
-	
+	@include chroma-create-flex-classes();
 }
 
-
+// responsive classes
 @if ($chroma-grid-scaffold-flexbox == true AND $chroma-grid-scaffold-responsive == true) {
-	// row direction modifier
 	@each $_mq, $_px in $chroma-breakpoints {
         @if ($chroma-is-mobile-first == true) {    
             @include mq($from: $_mq) {
-                @include chroma-create-flex-direction($_mq);
+                @include chroma-create-flex-classes($_mq);
             }
         } @else {        
             @include mq($until: $_mq) {
-            	@include chroma-create-flex-direction($_mq);
+            	@include chroma-create-flex-classes($_mq);
             }
         }
     }

@@ -148,9 +148,8 @@ $chroma-grid-scaffold-default : true; <span class="comment">// creates default g
                                            <span class="comment">// set to 'null' if you want full width</span>
 @include chroma-row()                      <span class="comment">// creates a row element</span>
 
-@include chroma-column($column-amount, {$total-columns, $breakpoint}); <span class="comment">// creates column
-or</span>
-@include chroma-columns(...)               <span class="comment">// as an alias</span>
+@include chroma-column()                   <span class="comment">// the generic column class</span>
+@include chroma-columns($column-amount, {$total-columns, $breakpoint}); <span class="comment">// creates column</span>
 
 @include chroma-clearfix()                 <span class="comment">// the usual suspect</span></code></pre>
 
@@ -393,7 +392,209 @@ $chroma-grid-scaffold-responsive : true;</code></pre>
 
 
 
+				<section class="row" id="grid-flexbox">
+					<div class="cols-full">
+						<h1>grid.flexbox <span class="byline">_layout.grid.flexbox.scss</span></h1>
+						<h2>import &amp; settings</h2>
+						<pre><code>@import 'layout.grid.flexbox';
 
+$chroma-is-flexbox: false; <span class="comment">// if chroma should use flexbox as layout</span></code></pre>
+
+						<h2>usage &amp; mixins</h2>
+						<h3>css selector naming scheme</h3>
+						<pre><code><span class="comment">// flex columns</span>
+.cols-{column}@{breakpoint}         <span class="comment">// where {column} is the span you'd like</span>
+.cols-x--{ratio}@{breakpoint}       <span class="comment">// self-growing column, ratio: 1 to 4</span>
+
+<span class="comment">// flex row modifier for alignment</span>
+.row--{modifier}@{breakpoint}        <span class="comment">// modifier: start | center | end | top | middle | bottom | between | around | stretch | baseline</span>
+<span class="comment">// flex row modifier for directions</span>
+.row--{modifier}@{breakpoint}        <span class="comment">// modifier: reverse | column | column-reverse</span>
+
+<span class="comment">// flex column modifier</span>
+.cols--{modifier}@{breakpoint}       <span class="comment">// modifier: bottom | middle | baseline | stretch</span>
+
+<span class="comment">// flex column modifier for ordering columns</span>
+.cols--{order}@{breakpoint}          <span class="comment">// modifier: order-1 | order-2 | order-3 | first | last</span></code></pre>
+						<h3>mixins</h3>
+						<pre><code><span class="comment">// row alignment </span>
+@include chroma-row-align($align)           <span class="comment">// $align: start | center | end | top | middle | bottom | around | between | stretch | baseline</span>
+<span class="comment">// row directions </span>
+@include chroma-row-direction($direction)   <span class="comment">// $direction: reverse | column | column-reverse</span>
+
+<span class="comment">// self-growing columns</span>
+@include chroma-column-grow($ratio)         <span class="comment">// ratio: integer</span>
+
+<span class="comment">// column reordering</span>
+@include chroma-column-first()
+@include chroma-column-last()
+@include chroma-column-order($order)        <span class="comment">// order: integer</span>
+
+<span class="comment">// column alignemnt</span>
+@include chroma-column-align($direction)    <span class="comment">// directions: top | middle | bottom | stretch | baseline</span></code></pre>
+
+
+						<h2>examples</h2>
+						<h3>self-growing columns</h3>
+						<div class="container container--flexbox example">
+							<div class="row">
+								<div class="cols-2"><div class="cell">.cols-2</div></div>
+								<div class="cols-4"><div class="cell">.cols-4</div></div>
+								<div class="cols-x"><div class="cell em">.cols-x</div></div>
+							</div>
+							<div class="row">
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+								<div class="cols-x--2"><div class="cell em">.cols-x--2</div></div>
+								<div class="cols-x--4"><div class="cell em">.cols-x--4</div></div>
+							</div>
+							<div class="row">
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+								<div class="cols-x"><div class="cell">.cols-x</div></div>
+							</div>
+						</div>
+						<h3>alignment</h3>
+						<h4>.row--start</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--start">
+								<div class="cols-1"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-3"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--center</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--center">
+								<div class="cols-1"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-3"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--end</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--end">
+								<div class="cols-1"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-3"><div class="cell"></div></div>
+							</div>
+						</div>
+
+						<h4>.row--top</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--top" style="height: 150px;">
+								<div class="cols-6"><div class="cell"></div></div>
+								<div class="cols-6"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--middle</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--middle" style="height: 150px;">
+								<div class="cols-6"><div class="cell"></div></div>
+								<div class="cols-6"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--bottom</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--bottom" style="height: 150px;">
+								<div class="cols-6"><div class="cell"></div></div>
+								<div class="cols-6"><div class="cell"></div></div>
+							</div>
+						</div>
+						
+						<h4>single column alignment</h4>
+						<div class="container container--flexbox example">
+							<div class="row" style="height: 150px;">
+								<div class="cols-3 cols--top"><div class="cell">.cols--top</div></div>
+								<div class="cols-3 cols--middle"><div class="cell">.cols--middle</div></div>
+								<div class="cols-3 cols--bottom"><div class="cell">.cols--bottom</div></div>
+								<div class="cols-3 cols--stretch"><div class="cell">.cols--stretch</div></div>
+							</div>
+						</div>
+
+
+						<h3>distribution</h3>
+						<h4>.row--around</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--around">
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--between</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--between">
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+							</div>
+						</div>
+						<h4>.row--stretch</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--stretch" style="height: 150px;">
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell"></div></div>
+							</div>
+						</div>
+
+
+						
+						
+
+
+						<h3>reordering</h3>
+						<h4>.row--reverse</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--reverse">
+								<div class="cols-1"><div class="cell">1</div></div>
+								<div class="cols-2"><div class="cell">2</div></div>
+								<div class="cols-3"><div class="cell">3</div></div>
+							</div>
+						</div>
+
+						<h4>.row--column</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--column">
+								<div class="cols-1"><div class="cell">1</div></div>
+								<div class="cols-2"><div class="cell">2</div></div>
+								<div class="cols-3"><div class="cell">3</div></div>
+							</div>
+						</div>
+
+						<h4>.row--column-reverse</h4>
+						<div class="container container--flexbox example">
+							<div class="row row--column-reverse">
+								<div class="cols-1"><div class="cell">1</div></div>
+								<div class="cols-2"><div class="cell">2</div></div>
+								<div class="cols-3"><div class="cell">3</div></div>
+							</div>
+						</div>
+
+						<h4>single column reordering: .cols--order-*</h4>
+						<div class="container container--flexbox example">
+							<div class="row">
+								<div class="cols-2"><div class="cell">1</div></div>
+								<div class="cols-4"><div class="cell">2</div></div>
+								<div class="cols-x cols--first"><div class="cell em">.cols--first</div></div>
+							</div>
+							<div class="row">
+								<div class="cols-2"><div class="cell">1</div></div>
+								<div class="cols-4 cols--last"><div class="cell em">.cols--last</div></div>
+								<div class="cols-x"><div class="cell">3</div></div>
+							</div>
+							<div class="row">
+								<div class="cols-2 cols--order-2"><div class="cell em">1 .cols--order-1</div></div>
+								<div class="cols-4 cols--order-1"><div class="cell em">2 .cols--order-2</div></div>
+								<div class="cols-x cols--order-3"><div class="cell em">3 .cols--order-3</div></div>
+							</div>
+						</div>
+
+					</div>
+
+				</section>
 
 
 				<section class="row" id="utils">
@@ -421,15 +622,38 @@ $chroma-grid-scaffold-responsive : true;</code></pre>
 @include chroma-show({$display, $breakpoint});   <span class="comment">// css display types: block | inline | table-cell ...</span></code></pre>
 
 						<h2>examples</h2>
-						<div class="container example">
-							<section class="row">
-								<div class="cols-4 hide@md"><div class="cell">.hide@md</div></div>
-								<div class="cols-4 show@md"><div class="cell">.show@md</div></div>
-								<div class="cols-4 visible@md"><div class="cell">.visible@md</div></div>
-								<div class="cols-4 invisible@md"><div class="cell">.invisible@md</div></div>
-								<div class="cols-4 show-block@md"><div class="cell">.show-block@md</div></div>
-								<div class="cols-4 show-inline@md"><div class="cell">.show-inline@md</div></div>
-							</section>
+						<div class="container">
+							<div class="row">
+								<table>
+									<tr>
+										<th></th><th>@sm</th><th>@md</th><th>@lg</th><th>@xl</th>
+									</tr>
+									<tr>
+										<th><code>.show-*@xs</code></th><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.show-*@md</code></th><td class="is-hidden">is hidden</td><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.show-*@lg</code></th><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.show-*@xl</code></th><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-shown">is shown</td>
+									</tr>
+									<tr>
+										<th><code>.hide@sm</code></th><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.hide@md</code></th><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.hide@lg</code></th><td class="is-shown">is shown</td><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td><td class="is-hidden">is hidden</td>
+									</tr>
+									<tr>
+										<th><code>.hide@xl</code></th><td class="is-shown">is shown</td><td class="is-shown">is shown</td><td class="is-shown">is shown</td><td class="is-hidden">is hidden</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -456,13 +680,6 @@ $chroma-grid-scaffold-utils-print: true; <span class="comment">// creates defaul
 
 .show-print-{display}    <span class="comment">// css display types: block | inline | inline-block</span></code></pre>
 
-						<h2>examples</h2>
-						<div class="container example">
-							<section class="row">
-								<div class="cols-12 show-print">.show-print</div>
-								<div class="cols-12 hide-print">.hide-print</div>
-							</section>
-						</div>
 					</div>
 				</section>
 
@@ -484,6 +701,9 @@ $chroma-grid-max-width    : null;     <span class="comment">// maximum container
 
 $chroma-is-mobile-first   : true;     <span class="comment">// if layout is mobile first</span>
 $chroma-is-static-layout  : false;    <span class="comment">// sets a static container layout with fixed width</span>
+$chroma-is-flexbox        : false;    <span class="comment">// if flex box model is used</span>
+$chroma-is-bem-syntax     : false;    <span class="comment">// if BEM is used in row__cols classes</span>
+
 
 $chroma-breakpoints : (               <span class="comment">// default breakpoints for responsive views</span>
                         sm:  320px,
@@ -508,6 +728,7 @@ $chroma-column-delimiter      : false;       <span class="comment">// additional
 $chroma-grid-scaffold-default          : true;     <span class="comment">// creates default grid classes</span>
 $chroma-grid-scaffold-modifier         : true;     <span class="comment">// creates default grid modifier classes</span>
 $chroma-grid-scaffold-responsive       : true;     <span class="comment">// creates default grid responsive classes</span>
+$chroma-grid-scaffold-flexbox          : true;     <span class="comment">// creates default grid flexbox modifier classes</span>
 $chroma-grid-scaffold-utils            : true;     <span class="comment">// creates default util classes</span>
 $chroma-grid-scaffold-utils-responsive : true;     <span class="comment">// creates default responsive util classes</span>
 $chroma-grid-scaffold-utils-print      : true;     <span class="comment">// creates default print util classes</span>

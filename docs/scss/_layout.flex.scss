@@ -1,0 +1,36 @@
+
+// additional flex classes for demo site
+$chroma-is-flexbox      		: true;
+
+.container--flexbox {
+	// row
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
+		@include chroma-row();
+		&:before, &:after {
+			display: none;
+		}
+	}
+	// generic column
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}-"] {
+		@include chroma-column();
+	}
+	@if ($chroma-is-flexbox) {
+		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-x {
+			flex-grow: 1;
+		}
+	}
+
+	// columns spanning from 1 to N
+	@for $i from 1 through $chroma-grid-amount {
+		@include chroma-create-column-classes($i, $chroma-grid-amount);
+	}
+
+	@include chroma-create-flex-classes();
+
+
+	.cell--large {
+		height: 130px;
+	}
+
+
+}

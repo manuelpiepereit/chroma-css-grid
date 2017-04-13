@@ -1,12 +1,12 @@
 {
 	"name": "chroma-css",
-	"version": "2.4.1",
+	"version": "2.5.0",
 	"description": "A highly versatile css grid framework for simple but customizable web development.",
 	"repository": {
 		"type": "git",
-		"url": "https://bitbucket.org/neonpastell/chroma-css.git"
+		"url": "https://github.com/manuelpiepereit/chroma-css-grid.git"
 	},
-	"homepage": "https://bitbucket.org/neonpastell/chroma-css",
+	"homepage": "https://github.com/manuelpiepereit/chroma-css-grid",
 	"main": "css/chroma.css",
 	"authors": [
 		"Manuel Piepereit <manuel.piepereit@neonpastell.de> (http://www.neonpastell.de/)"
@@ -17,7 +17,8 @@
 		"icon.png",
 		"gulpfile.js",
 		"scss/chroma.scss",
-		"scss/chroma-flex.scss"
+		"scss/chroma-flex.scss",
+		"scss/chroma-flex-visualgrid.scss"
 	],
 	"dependencies": {
 		"sass-mq": "3.2.9"

@@ -1,0 +1,107 @@
+/*
+* Chroma CSS utils.visualgrid
+* a visual grid overlay for the whole site, eases layout during development
+* based on https://css-tricks.com/building-css-grid-overlay/
+*
+* @version 1.0.0
+* @since 2.5.0
+*
+* add 'show-vc' and 'show-mq' to html tag
+*/
+
+// default setting variables
+$chroma-visualgrid-scaffold 		: false !default; // scaffold classes
+$chroma-visualgrid-show-edges		: false !default; // is showing 1px edge lines
+$chroma-visualgrid-show-baseline	: true !default; // is showing 1px baselines
+
+$chroma-visualgrid-color			: rgba(#ff7300, 0.1) !default; // columns color
+$chroma-visualgrid-zindex			: 9999 !default; // z index
+
+$chroma-visualgrid-baseline-height	: 3rem !default; // baseline
+$chroma-visualgrid-baseline-shift	: 0 !default; // baseline shift from top
+$chroma-visualgrid-baseline-color	: rgba(#ff7300, 0.2) !default; // baseline color
+
+$chroma-visualgrid-mq-color			: #ff7300 !default; // media query text color
+
+
+// creates a visual grid overlay for development
+@mixin chroma-visualgrid() {
+	$chroma-visualgrid-column-width: calc((100% / #{$chroma-grid-amount}) - #{$chroma-grid-gutter});
+	$chroma-visualgrid-repeating-width: calc(100% / #{$chroma-grid-amount});
+	
+	$_chroma-visualgrid-repeating-columns: repeating-linear-gradient(
+			90deg, 
+			transparent 0, 
+			transparent $chroma-grid-gutter,
+			$chroma-visualgrid-color $chroma-grid-gutter, 
+			$chroma-visualgrid-color $chroma-visualgrid-column-width,
+			transparent $chroma-visualgrid-column-width,
+			transparent $chroma-visualgrid-repeating-width
+		);
+	$_chroma-visualgrid-edges: linear-gradient(90deg, #{$chroma-visualgrid-baseline-color} 0px, #{$chroma-visualgrid-baseline-color} 1px, transparent 1px, transparent 100%), 
+		   linear-gradient(-90deg, #{$chroma-visualgrid-baseline-color} 0px, #{$chroma-visualgrid-baseline-color} 1px, transparent 1px, transparent 100%);
+
+	$_chroma-visualgrid-baseline: repeating-linear-gradient(
+			0,
+			$chroma-visualgrid-baseline-color,
+			$chroma-visualgrid-baseline-color 1px,
+			transparent 1px,
+			transparent $chroma-visualgrid-baseline-height
+ 		);
+
+	// create background image
+	$_chroma-visualgrid-image: #{$_chroma-visualgrid-repeating-columns};
+	@if ($chroma-visualgrid-show-edges) {
+		$_chroma-visualgrid-image: #{$_chroma-visualgrid-image}, #{$_chroma-visualgrid-edges};
+  	} 
+  	@if ($chroma-visualgrid-show-baseline) {
+  		$_chroma-visualgrid-image: #{$_chroma-visualgrid-image}, #{$_chroma-visualgrid-baseline};
+  	}
+
+
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	margin-right: auto;
+	margin-left: auto;
+	content: '';
+	pointer-events: none;
+
+	// width: calc(100% - (2 * #{$chroma-grid-gutter}));
+	width: 100%;
+  	max-width: $chroma-grid-max-width;
+  	background-size: calc(100%) 100%;
+	background-position: 0 $chroma-visualgrid-baseline-shift;
+	z-index: $chroma-visualgrid-zindex;
+  	background-image: #{$_chroma-visualgrid-image};
+}
+
+// shows active chroma grid media queries as text
+@mixin chroma-visualmq() {
+	content: 'base';
+	position: fixed;
+	bottom: 1rem;
+	left: 1rem;
+	font-size: 1rem;
+	font-family: -apple-system,sans-serif;
+	color: $chroma-visualgrid-mq-color;
+	z-index: $chroma-visualgrid-zindex;
+	@each $chroma-breakpoint, $chroma-breakpoint-px in $chroma-breakpoints {
+		@include at($chroma-breakpoint) {
+			content: '#{$chroma-breakpoint}';
+		}
+	}
+}
+
+
+// scaffold css
+@if ($chroma-visualgrid-scaffold == true) {
+	html.show-vg {
+		position: relative;
+	}
+	html.show-vg::before {
+		@include chroma-visualgrid();
+	}
+	html.show-mq::after {
+		@include chroma-visualmq();
+	}
+}

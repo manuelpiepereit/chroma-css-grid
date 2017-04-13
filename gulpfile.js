@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 now     = plugins.dateformat(new Date(), "yyyy-mm-dd, HH:MM");
 pkg     = require('./package.json');
 banner  = ['/*!',
-        ' * ChromaCSS, (c) 2016 Neonpastell GmbH',
+        ' * ChromaCSS, (c) 2014 - 2017 Neonpastell GmbH',
         ' * <%= pkg.homepage %>',
         ' *',
         ' * @version <%= pkg.version %>',
@@ -21,7 +21,7 @@ gulp.task('css:docs', function() {
         .pipe(plugins.sass( {outputStyle:'expanded', indentWidth:4} ))
         .pipe(plugins.autoprefixer('last 2 version'))
         .pipe(plugins.header(banner, { pkg : pkg }))
-        //.pipe(plugins.cleanCss({compatibility: 'ie8'}))
+        .pipe(plugins.cleanCss({'mediaMerging': false}))
         .pipe(gulp.dest('./docs/css/'))
         .pipe(plugins.notify({ message: 'docs.css compiled' }));
 });

@@ -1,11 +1,11 @@
 {
   "name": "chroma-css",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "A highly versatile css grid framework for simple but customizable web development.",
-  "homepage": "https://bitbucket.org/neonpastell/chroma-css.git",
+  "homepage": "https://github.com/manuelpiepereit/chroma-css-grid",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/neonpastell/chroma-css.git"
+    "url": "https://github.com/manuelpiepereit/chroma-css-grid.git"
   },
   "author": {
     "name": "Neonpastell GmbH",

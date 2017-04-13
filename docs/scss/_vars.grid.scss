@@ -1,2 +1,13 @@
+// grid
 $chroma-grid-max-width: 1080px;
 $chroma-grid-gutter: 10px;
+
+// visual grid
+$chroma-visualgrid-scaffold: true;
+$chroma-visualgrid-show-edges: true;
+$chroma-visualgrid-show-baseline: false;
+// $chroma-visualgrid-color: rgba(hotpink, 0.1);
+// $chroma-visualgrid-mq-color: hotpink;
+
+// $chroma-grid-scaffold-debug: true;
+$chroma-grid-scaffold-todo: true;

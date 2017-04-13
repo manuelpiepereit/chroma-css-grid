@@ -1,0 +1,123 @@
+/*!
+ * ChromaCSS, (c) 2014 - 2017 Neonpastell GmbH
+ * https://bitbucket.org/neonpastell/chroma-css-grid.git
+ *
+ * @version 2.5.0
+ * @date 2017-04-13, 18:58
+ */
+/*
+*	Chroma CSS grid.base
+*/
+* {
+    box-sizing: border-box;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+*	Chroma CSS grid.flexbox
+*/
+/*
+*	Chroma CSS grid.modifier
+*/
+/*
+*   Chroma CSS grid.responsive
+*/
+/**
+*   Chroma grid responsive modifiers
+*/
+/*
+*   Chroma CSS utils
+*/
+/*
+*   Chroma CSS utils.responsive
+*/
+/*
+*   Chroma CSS utils.print
+*/
+/*
+* Chroma CSS utils.visualgrid
+* a visual grid overlay for the whole site, eases layout during development
+* based on https://css-tricks.com/building-css-grid-overlay/
+*
+* @version 1.0.0
+* @since 2.5.0
+*
+* add 'show-vc' and 'show-mq' to html tag
+*/
+html.show-vg {
+    position: relative;
+}
+
+html.show-vg::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    content: '';
+    pointer-events: none;
+    width: 100%;
+    background-size: -webkit-calc(100%) 100%;
+    background-size: calc(100%) 100%;
+    background-position: 0 0;
+    z-index: 9999;
+    background-image: -webkit-repeating-linear-gradient(left, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) -webkit-calc((100% / 12) - 10px), transparent -webkit-calc((100% / 12) - 10px), transparent -webkit-calc(100% / 12)), -webkit-repeating-linear-gradient(0, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
+    background-image: repeating-linear-gradient(90deg, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) calc((100% / 12) - 10px), transparent calc((100% / 12) - 10px), transparent calc(100% / 12)), repeating-linear-gradient(0, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
+}
+
+html.show-mq::after {
+    content: 'base';
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+    font-family: -apple-system,sans-serif;
+    color: #ff7300;
+    z-index: 9999;
+}
+
+@media (min-width: 20em) {
+    html.show-mq::after {
+        content: "sm";
+    }
+}
+
+@media (min-width: 46.25em) {
+    html.show-mq::after {
+        content: "md";
+    }
+}
+
+@media (min-width: 61.25em) {
+    html.show-mq::after {
+        content: "lg";
+    }
+}
+
+@media (min-width: 81.25em) {
+    html.show-mq::after {
+        content: "xl";
+    }
+}
+
+/*
+*   Debugging classes
+*/

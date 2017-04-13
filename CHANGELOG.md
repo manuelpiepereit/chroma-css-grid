@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2.5.0
+
+* added utils.visualgrid
+* updated documentation
+
+### 2.4.0
+
+* added setting for BEM syntax
+* added optional flexbox layout
+* added chroma-flex.css
+* updated documentation
+
 ### 2.3.0
 
 * fixed utils.responsive visibility

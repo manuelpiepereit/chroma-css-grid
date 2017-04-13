@@ -2,31 +2,42 @@
 *   Debugging classes
 */
 
+
+$chroma-grid-scaffold-debug	  : false !default; // creates some debugging classes
+$chroma-grid-scaffold-todo    : false !default; // creates some debugging/todo classes
+
+$chroma-debug-color-container : rgba(150,150,150,0.05) !default;
+$chroma-debug-color-row       : rgba(150,150,150,0.05) !default;
+$chroma-debug-color-col       : rgba(0,0,150,0.05) !default;
+
+$chroma-debug-color-todo      : rgba(255,115,0, 1) !default;
+
 @if ($chroma-grid-scaffold-debug == true) {
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-container},
-	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
-		background-color: rgba(150, 150, 150, 0.05);
+	.#{$chroma-grid-namespace}#{$chroma-grid-name-container} {
+		background-color: $chroma-debug-color-container;
 	}
 
 	.#{$chroma-grid-namespace}#{$chroma-grid-name-row} {
-		background-color: rgba(150, 150, 150, 0.05);
+		background-color: $chroma-debug-color-row;
 	}
 
 	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] {
-		background-color: rgba(0, 0, 150, 0.05);
-		border: 1px solid rgba(0, 0, 150, 0.05);
+		background-color: $chroma-debug-color-col;
+		border: 1px solid $chroma-debug-color-col;
 	}
-
-	.cell {
-		background-color: rgba(0, 0, 150, 0.05);
+	[class*="#{$chroma-grid-namespace}#{$chroma-grid-name-col}"] > * {
+		background-color: $chroma-debug-color-col;
 		-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
 		border-radius: 3px;
-		border: 1px solid rgba(0, 0, 0, 0.05);
+		border: 1px solid $chroma-debug-color-col;
 	}
+}
 
+
+@if ($chroma-grid-scaffold-todo == true) {
 	.debug,
 	.\@todo {
-		box-shadow: 0 0 6px 3px rgba(255,115,0, 1) !important;
+		box-shadow: 0 0 6px 3px $chroma-debug-color-todo !important;
 	}
 }

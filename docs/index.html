@@ -8,7 +8,7 @@
 	<title>ChromaCSS Grid Framework</title>
 	<meta name="author" content="Manuel Piepereit">
 	<meta name="publisher" content="Neonpastell GmbH">
-	<meta name="copyright" content="© 2016, Neonpastell GmbH, Augsburg">
+	<meta name="copyright" content="© 2014-2017, Neonpastell GmbH, Augsburg">
 	<meta name="description" content="A highly versatile css grid framework for simple but customizable web development.">
 	
 	<link rel="stylesheet" href="css/styles.css">
@@ -24,7 +24,7 @@
 							<div class="v-center__inner">
 								<h1>ChromaCSS</h1>
 								<p>A highly versatile css grid framework for simple but customizable web development.</p>
-								<p>@version: 2.4.1</p>
+								<p>@version: 2.5.0</p>
 							</div>	
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 		</div>
 		<div class="container description">
 			<div class="row">
-				<div class="cols-full">Why another grid framework? Well, because...</div>
+				<div class="cols-8 cols--center"><p>Why another grid framework? Well, because I was kind of unhappy with existing grid systems, simply wanted to dive deeper into <a href="http://sass-lang.com/" target="_blank">Sass</a> and yada yada yada.... <br>Fuck it, it's doing what it should do for a couple of years now.</p></div>
 			</div>
 			<div class="row">
 				<div class="cols-12 cols-4@lg">
@@ -42,20 +42,29 @@
 				</div>
 				<div class="cols-12 cols-4@lg">
 					<h2>modular &amp; customizable</h2>
-					<p>Import only those partials you need and customize the grid to your own need. With an individual column amount, maximum site width and custom media query breakpoints.</p>
+					<p>Import only those partials you need and customize the grid to your own needs. With an individual column amount, maximum site width and custom media query breakpoints.</p>
 				</div>
 				<div class="cols-12 cols-4@lg">
 					<h2>BEM &amp; SASS</h2>
-					<p>We're using BEM-Syntax where needed.</p>
+					<p>We're using BEM-Syntax where needed or optionally also for row and columns. <br>And everything is done with Sass.</p>
 				</div>
 			</div>
 		</div>
 	</header>
 
+
+
+
+
+
+
+	
+
+
 	<main class="container">
 
-		<div class="row">
-			<div class="cols-2 cols--right show@lg">
+		<div class="row"> 
+			<div class="cols-2 cols--right show@lg"> <!-- $NAVIGATION start -->
 				<div id="nav-pre">chroma css</div>
 				<nav id="nav">
 					<ul>
@@ -76,15 +85,19 @@
 							<ul>
 								<li><a href="#utils">hide/show</a></li>
 								<li><a href="#utils-print">print</a></li>
+								<li><a href="#utils-visualgrid">visual grid</a></li>
+								<li><a href="#utils-debug">debug</a></li>
 							</ul>
 						</li>
 						<li><a href="#grid-settings">settings</a></li>
 					</ul>
 				</nav>
-			</div>
+			</div> <!-- $NAVIGATION end -->
+
+
 
 			<div class="cols-12 cols-9@lg cols--left content-wrapper">
-				<section class="row" id="getting-started">
+				<section class="row" id="getting-started"> <!-- $GETTING-STARTET start -->
 					<div class="cols-full">
 						<h1>getting started <!-- <span class="byline">bower install chroma-css</span> --></h1>
 						<p>these docs are not at great length, but should give you an idea about what you are dealing with.</p>
@@ -117,7 +130,7 @@
 
 
 
-				<section class="row" id="grid-base">
+				<section class="row" id="grid-base"> <!-- $GRID-BASE start -->
 					<div class="cols-full">
 						<h1>grid <span class="byline">_layout.grid.base.scss</span></h1>
 						<p>So, if you want to, you also can import only those files you really need. But as this is the base of the ChromaCSS grid system, you'll at least need these three imports:</p>
@@ -125,8 +138,8 @@
 						<pre><code>@import 'grid.settings';
 @import '[path_to_bower_components]/sass-mq/mq';
 @import 'layout.grid.base';</code></pre>
-						<p>You always have to define your own grid settings before importing the <code>grid.settings</code> file.</p>
-						<pre><code>// settings
+						<p>You always have to define your own grid settings before importing the <code>grid.settings</code> file. <br>Take a look at <a href="#grid-settings" class="js-scroll">all the settings</a> you can change, to customize ChromaCSS to fit perfectly for you.</p>
+						<pre><code><span class="comment">// settings</span>
 $chroma-grid-amount           : 12;     <span class="comment">// number of total columns</span>
 $chroma-grid-gutter           : 10px;   <span class="comment">// gutter between columns</span>
 $chroma-grid-max-width        : null;   <span class="comment">// maximum container width in px</span>
@@ -234,7 +247,7 @@ $chroma-grid-scaffold-default : true; <span class="comment">// creates default g
 
 
 
-				<section class="row" id="grid-modifier">
+				<section class="row" id="grid-modifier"> <!-- $GRID-MODIFIER start -->
 					<div class="cols-full">
 						<h1>grid.modifier <span class="byline">_layout.grid.modifier.scss</span></h1>
 
@@ -312,7 +325,7 @@ $chroma-grid-scaffold-modifier : true;</code></pre>
 
 
 
-				<section class="row" id="grid-responsive">
+				<section class="row" id="grid-responsive"> <!-- $GRID-RESPONSIVE start -->
 					<div class="cols-full">
 						<h1>grid.responsive <span class="byline">_layout.grid.responsive.scss</span></h1>
 						<h2>import &amp; settings</h2>
@@ -392,7 +405,7 @@ $chroma-grid-scaffold-responsive : true;</code></pre>
 
 
 
-				<section class="row" id="grid-flexbox">
+				<section class="row" id="grid-flexbox"> <!-- $GRID-FLEXBOX start -->
 					<div class="cols-full">
 						<h1>grid.flexbox <span class="byline">_layout.grid.flexbox.scss</span></h1>
 						<h2>import &amp; settings</h2>
@@ -597,7 +610,7 @@ $chroma-is-flexbox: false; <span class="comment">// if chroma should use flexbox
 				</section>
 
 
-				<section class="row" id="utils">
+				<section class="row" id="utils"> <!-- $UTILS start -->
 					<div class="cols-full">
 						<h1>utils <span class="byline">_layout.utils.scss</span></h1>
 						<h2>import &amp; settings</h2>
@@ -659,40 +672,104 @@ $chroma-is-flexbox: false; <span class="comment">// if chroma should use flexbox
 				</section>
 
 
-
-
-
-
-
-
-
-				<section class="row" id="utils-print">
+				<section class="row" id="utils-print"> <!-- $UTILS-PRINT start -->
 					<div class="cols-full">
 						<h1>utils.print <span class="byline">_layout.utils.print.scss</span></h1>
 						<h2>import &amp; settings</h2>
-						<pre><code>@import 'layout.utils.print';
-
-$chroma-grid-scaffold-utils-print: true; <span class="comment">// creates default print util classes</span></code></pre>
+						<pre><code><span class="comment">// import &amp; scaffold</span>
+@import 'layout.utils.print'; 
+$chroma-grid-scaffold-utils-print : true; <span class="comment">// creates default print util classes</span></code></pre>
 
 						<h2>usage &amp; mixins</h2>
 						<h3>css selectors</h3>
-						<pre><code>.hide-print
+						<pre><code>.hide-print <span class="comment">// hides element in print view</span>
+.show-print-{display} <span class="comment">// shows element only in print – display types: block | inline | inline-block</span></code></pre>
 
-.show-print-{display}    <span class="comment">// css display types: block | inline | inline-block</span></code></pre>
+					</div>
+				</section>
 
+
+				<section class="row" id="utils-visualgrid"> <!-- $UTILS-VISUALGRID start -->
+					<div class="cols-full">
+						<h1>utils.visualgrid <span class="byline">_layout.utils.visualgrid.scss</span></h1>
+						<p>Shows the grid as page overlay for better and faster page layout development. <a href="#" id="vg-toggle">Toggle html.show-vg to test it.</a><br>And shows the currently used media query (bottom left corner): <a href="#" id="mq-toggle">Toggle html.show-mq</a></p>
+						<h2>import &amp; settings</h2>
+						<pre><code><span class="comment">// import &amp; scaffold</span>
+@import 'layout.utils.visualgrid'; 
+$chroma-visualgrid-scaffold        : false; <span class="comment">// if creating visual grid classes</span>
+
+<span class="comment">// settings</span>
+$chroma-visualgrid-show-edges      : false; <span class="comment">// is showing 1px edge lines</span>
+$chroma-visualgrid-show-baseline   : true; <span class="comment">// is showing 1px baselines</span>
+
+$chroma-visualgrid-color           : rgba(#ff7300, 0.1); <span class="comment">/ columns color</span>
+$chroma-visualgrid-zindex          : 9999; <span class="comment">// visual grid z index</span>
+$chroma-visualgrid-baseline-height : 3rem; <span class="comment">// baseline line height</span>
+$chroma-visualgrid-baseline-shift  : 0; <span class="comment">// baseline shift from top</span>
+$chroma-visualgrid-baseline-color  : rgba(#ff7300, 0.2); <span class="comment">// baseline color</span>
+
+$chroma-visualgrid-mq-color        : #ff7300 !default; <span class="comment">// media query text color</span>
+</code></pre>
+						<h2>usage &amp; mixins</h2>
+						<h3>css selectors</h3>
+						<pre><code>html.show-vg <span class="comment">// add 'show-vg' to show the grid</span>
+html.show-mq <span class="comment">// add 'show-mq' to show the currently used media query</span></code></pre>
+						
+						<h4>mixins</h4>
+						<pre><code>@include chroma-visualgrid(); <span class="comment">// creates visual grid as overlay</span>
+@include chroma-visualmq(); <span class="comment">// shows media query as pseudo element</span>
+</code></pre>
+						
+					</div>
+				</section>
+
+
+				<section class="row" id="utils-debug"> <!-- $UTILS-DEBUG start -->
+					<div class="cols-full">
+						<h1>utils.debug <span class="byline">_debug.grid.scss</span></h1>
+						<p>Adds colors to all your container, row and column elements during compilation and creates some classes to highlight elements during development.</p>
+						<h2>import &amp; settings</h2>
+						<pre><code><span class="comment">// import &amp; scaffold</span>
+@import 'debug.grid'; 
+$chroma-grid-scaffold-debug   : false; <span class="comment">// if creating container, row and column elements with colored backgrounds</span>
+$chroma-grid-scaffold-todo    : false; <span class="comment">// if creating css classes for highlighting elements</span>
+
+<span class="comment">// settings</span>
+$chroma-debug-color-container : rgba(150,150,150,0.05); <span class="comment">// background color for containers</span>
+$chroma-debug-color-row       : rgba(150,150,150,0.05); <span class="comment">// background color for rows</span>
+$chroma-debug-color-col       : rgba(0,0,150,0.05); <span class="comment">// background color for columns</span>
+$chroma-debug-color-todo      : rgba(255,115,0, 1); <span class="comment">// highlight color for '@todo' class</span>
+</code></pre>
+						<h2>usage</h2>
+						<h3>css selectors</h3>
+						<pre><code>.@todo or .debug <span class="comment">// add '@-todo' or 'debug' class to highlight element</span></code></pre>
+
+						<h2>examples</h2>
+						<div class="container container--flexbox example">
+							<div class="row row--center">
+								<div class="cols-1"><div class="cell"></div></div>
+								<div class="cols-2"><div class="cell @todo">@debug</div></div>
+								<div class="cols-3"><div class="cell"></div></div>
+							</div>
+						</div>
 					</div>
 				</section>
 
 
 
 
+				
 
 
 
 
-				<section class="row" id="grid-settings">
+
+
+
+
+				<section class="row" id="grid-settings"> <!-- $SETTINGS start -->
 					<div class="cols-full">
-						<h1>settings <span class="byline">_grid.settings.scss</span></h1>
+						<h1>settings <span class="byline">_grid.settings.scss, _layout.utils.visualgrid.scss and _debug.grid.scss</span></h1>
 						<p>All default settings you can play with:</p>
 						<pre><code><span class="comment">// grid settings</span>
 $chroma-grid-amount       : 12;       <span class="comment">// number of total columns</span>
@@ -732,7 +809,26 @@ $chroma-grid-scaffold-flexbox          : true;     <span class="comment">// crea
 $chroma-grid-scaffold-utils            : true;     <span class="comment">// creates default util classes</span>
 $chroma-grid-scaffold-utils-responsive : true;     <span class="comment">// creates default responsive util classes</span>
 $chroma-grid-scaffold-utils-print      : true;     <span class="comment">// creates default print util classes</span>
-$chroma-grid-scaffold-debug            : false;    <span class="comment">// creates some debugging classes</span>
+
+
+
+<span class="comment">// during development: visual grid and debugging</span>
+$chroma-visualgrid-scaffold        : false; <span class="comment">// creates visual grid classes</span>
+$chroma-visualgrid-show-edges      : false; <span class="comment">// is showing 1px edge lines</span>
+$chroma-visualgrid-show-baseline   : true; <span class="comment">// is showing 1px baselines</span>
+$chroma-visualgrid-color           : rgba(#ff7300, 0.1); <span class="comment">/ columns color</span>
+$chroma-visualgrid-zindex          : 9999; <span class="comment">// visual grid z index</span>
+$chroma-visualgrid-baseline-height : 3rem; <span class="comment">// baseline line height</span>
+$chroma-visualgrid-baseline-shift  : 0; <span class="comment">// baseline shift from top</span>
+$chroma-visualgrid-baseline-color  : rgba(#ff7300, 0.2); <span class="comment">// baseline color</span>
+$chroma-visualgrid-mq-color        : #ff7300 !default; <span class="comment">// media query text color</span>
+
+$chroma-grid-scaffold-debug   : false;    <span class="comment">// creates some debugging classes</span>
+$chroma-grid-scaffold-todo    : false;    <span class="comment">// creates some highlighting classes</span>
+$chroma-debug-color-container : rgba(150,150,150,0.05); <span class="comment">// background color for containers</span>
+$chroma-debug-color-row       : rgba(150,150,150,0.05); <span class="comment">// background color for rows</span>
+$chroma-debug-color-col       : rgba(0,0,150,0.05); <span class="comment">// background color for columns</span>
+$chroma-debug-color-todo      : rgba(255,115,0, 1); <span class="comment">// highlight color for '@todo' class</span>
 </code></pre>
 
 					</div>
@@ -745,34 +841,13 @@ $chroma-grid-scaffold-debug            : false;    <span class="comment">// crea
 	<footer>
 		<div class="container">
 			<div class="row">
-				<div class="cols-12">created 2016 by <a href="http://www.neonpastell.de" target="_blank">Neonpastell GmbH</a>, <a href="http://www.manoufacture.net">Manuel Piepereit</a></div>
+				<div class="cols-12">created 2014 - 2017 by <a href="http://www.neonpastell.de" target="_blank">Neonpastell GmbH</a>, <a href="http://www.manoufacture.net">Manuel Piepereit</a></div>
 			</div>
 		</div>
 	</footer>
 
-	<script type="text/javascript">
-		window.onscroll = function() {
-			el = document.getElementById('nav');
-			if (findPos('nav-pre') < 0) {
-				el.style.position = "fixed";
-			} else {
-				el.style.position = 'relative';
-			}
-		};
-
-		function findPos(id) {
-		    var node = document.getElementById(id); 	
-		    var curtop = 0;
-		    var curtopscroll = 0;
-		    if (node.offsetParent) {
-		        do {
-		            curtop += node.offsetTop;
-		            curtopscroll += node.offsetParent ? node.offsetParent.scrollTop : 0;
-		        } while (node = node.offsetParent);
-		        return curtop - curtopscroll;
-		    }
-		}
-	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="js/scripts.js" type="text/javascript"></script>
 
 </body>
 </html>

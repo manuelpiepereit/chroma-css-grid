@@ -1,9 +1,9 @@
 /*!
- * ChromaCSS, (c) 2016 Neonpastell GmbH
- * https://bitbucket.org/neonpastell/chroma-css.git
+ * ChromaCSS, (c) 2014 - 2017 Neonpastell GmbH
+ * https://bitbucket.org/neonpastell/chroma-css-grid.git
  *
- * @version 2.4.1
- * @date 2016-09-20, 23:21
+ * @version 2.5.0
+ * @date 2017-04-13, 18:58
  */
 /*
 *	Chroma CSS grid.base
@@ -2386,6 +2386,16 @@
     }
 }
 
+/*
+* Chroma CSS utils.visualgrid
+* a visual grid overlay for the whole site, eases layout during development
+* based on https://css-tricks.com/building-css-grid-overlay/
+*
+* @version 1.0.0
+* @since 2.5.0
+*
+* add 'show-vc' and 'show-mq' to html tag
+*/
 /*
 *   Debugging classes
 */

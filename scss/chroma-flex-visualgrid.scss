@@ -1,3 +1,13 @@
+$chroma-is-flexbox: true;
+$chroma-grid-scaffold-default			: false;
+$chroma-grid-scaffold-modifier			: false;
+$chroma-grid-scaffold-responsive		: false;
+$chroma-grid-scaffold-flexbox           : false;
+$chroma-grid-scaffold-utils				: false;
+$chroma-grid-scaffold-utils-responsive	: false;
+$chroma-grid-scaffold-utils-print		: false;
+$chroma-visualgrid-scaffold: true;
+
 // import default grid settings
 @import "grid.settings";						
 

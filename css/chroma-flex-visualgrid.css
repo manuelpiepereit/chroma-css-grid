@@ -1,9 +1,9 @@
 /*!
  * ChromaCSS, (c) 2014 - 2017 Neonpastell GmbH
- * https://bitbucket.org/neonpastell/chroma-css-grid.git
+ * https://github.com/manuelpiepereit/chroma-css-grid
  *
- * @version 2.5.0
- * @date 2017-04-13, 18:58
+ * @version 2.5.1
+ * @date 2017-04-18, 14:54
  */
 /*
 *	Chroma CSS grid.base
@@ -58,10 +58,11 @@
 * @version 1.0.0
 * @since 2.5.0
 *
-* add 'show-vc' and 'show-mq' to html tag
+* add 'show-vg' and 'show-mq' to html tag
 */
 html.show-vg {
     position: relative;
+    min-height: 100vh;
 }
 
 html.show-vg::before {
@@ -79,8 +80,8 @@ html.show-vg::before {
     background-size: calc(100%) 100%;
     background-position: 0 0;
     z-index: 9999;
-    background-image: -webkit-repeating-linear-gradient(left, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) -webkit-calc((100% / 12) - 10px), transparent -webkit-calc((100% / 12) - 10px), transparent -webkit-calc(100% / 12)), -webkit-repeating-linear-gradient(0, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
-    background-image: repeating-linear-gradient(90deg, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) calc((100% / 12) - 10px), transparent calc((100% / 12) - 10px), transparent calc(100% / 12)), repeating-linear-gradient(0, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
+    background-image: -webkit-repeating-linear-gradient(left, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) -webkit-calc((100% / 12) - 10px), transparent -webkit-calc((100% / 12) - 10px), transparent -webkit-calc(100% / 12)), -webkit-repeating-linear-gradient(top, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
+    background-image: repeating-linear-gradient(90deg, transparent 0, transparent 10px, rgba(255, 115, 0, 0.1) 10px, rgba(255, 115, 0, 0.1) calc((100% / 12) - 10px), transparent calc((100% / 12) - 10px), transparent calc(100% / 12)), repeating-linear-gradient(180deg, rgba(255, 115, 0, 0.2), rgba(255, 115, 0, 0.2) 1px, transparent 1px, transparent 3rem);
 }
 
 html.show-mq::after {

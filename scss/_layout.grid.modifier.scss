@@ -75,7 +75,11 @@
 		@include chroma-column-push($i, $chroma-grid-amount);
 	}
 	@if ($chroma-column-delimiter) {
-		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--push {
+		$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--push;
+		@if ($chroma-column-delimiter == true) {
+			$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}\/#{$chroma-grid-amount}--push;
+		}
+		.#{$class} {
 			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--push;
 		}	
 	}
@@ -86,7 +90,11 @@
 		@include chroma-column-pull($i, $chroma-grid-amount);
 	}
 	@if ($chroma-column-delimiter) {
-		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--pull {
+		$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--pull;
+		@if ($chroma-column-delimiter == true) {
+			$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}\/#{$chroma-grid-amount}--pull;
+		}
+		.#{$class} {
 			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--pull;
 		}	
 	}
@@ -97,7 +105,11 @@
 		@include chroma-column-offset($i, $chroma-grid-amount);
 	}
 	@if ($chroma-column-delimiter) {
-		.#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--offset {
+		$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$chroma-grid-amount}--offset;
+		@if ($chroma-column-delimiter == true) {
+			$class: #{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}\/#{$chroma-grid-amount}--offset;
+		}
+		.#{$class} {
 			@extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}--offset;
 		}	
 	}

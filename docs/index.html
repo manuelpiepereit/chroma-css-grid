@@ -24,7 +24,7 @@
 							<div class="v-center__inner">
 								<h1>ChromaCSS</h1>
 								<p>A highly versatile css grid framework for simple but customizable web development.</p>
-								<p>@version: 2.5.0</p>
+								<p>@version: 2.5.1</p>
 							</div>	
 						</div>
 					</div>
@@ -193,6 +193,15 @@ $chroma-grid-scaffold-default : true; <span class="comment">// creates default g
 							<section class="row">
 								<div class="cols-3"><div class="cell">.cols-3</div></div>
 								<div class="cols-9"><div class="cell">.cols-9</div></div>
+							</section>
+							<section class="row">
+								<div class="cols-1/4"><div class="cell">.cols-1/4</div></div>
+								<div class="cols-1/4"><div class="cell">.cols-1/4</div></div>
+								<div class="cols-1/2"><div class="cell">.cols-1/2</div></div>
+								<div class="cols-1/3"><div class="cell">.cols-1/3</div></div>
+								<div class="cols-1/3"><div class="cell">.cols-1/3</div></div>
+								<div class="cols-1/3"><div class="cell">.cols-1/3</div></div>
+								<div class="cols-full"><div class="cell">.cols-1/1 <small>or</small> cols-full</div></div>
 							</section>
 						</div>
 						<h3>nested grid</h3>
@@ -797,9 +806,9 @@ $chroma-grid-name-container   : "container"; <span class="comment">// custom con
 $chroma-grid-name-row         : "row";       <span class="comment">// custom row name</span>
 $chroma-grid-name-col         : "cols";      <span class="comment">// custom column name</span>
 
-$chroma-breakpoint-delimiter  : \@;          <span class="comment">// how breakpoints are seperated in classes</span>
+$chroma-breakpoint-delimiter  : \@;          <span class="comment">// how breakpoints are seperated in classes, or use '--' for BEM-like Syntax</span>
 $chroma-column-delimiter      : false;       <span class="comment">// additional classes for columns, 
-                                             // eg: cols-5/12 or cols-5-of-12</span>
+                                             // eg: cols-5/12 ('\/' without quotes) or cols-5-of-12 ('-of-')</span>
 
 <span class="comment">// scaffold default classes</span>
 $chroma-grid-scaffold-default          : true;     <span class="comment">// creates default grid classes</span>

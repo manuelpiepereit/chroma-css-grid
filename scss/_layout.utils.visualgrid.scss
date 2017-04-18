@@ -6,7 +6,7 @@
 * @version 1.0.0
 * @since 2.5.0
 *
-* add 'show-vc' and 'show-mq' to html tag
+* add 'show-vg' and 'show-mq' to html tag
 */
 
 // default setting variables
@@ -42,7 +42,7 @@ $chroma-visualgrid-mq-color			: #ff7300 !default; // media query text color
 		   linear-gradient(-90deg, #{$chroma-visualgrid-baseline-color} 0px, #{$chroma-visualgrid-baseline-color} 1px, transparent 1px, transparent 100%);
 
 	$_chroma-visualgrid-baseline: repeating-linear-gradient(
-			0,
+			180deg,
 			$chroma-visualgrid-baseline-color,
 			$chroma-visualgrid-baseline-color 1px,
 			transparent 1px,
@@ -97,6 +97,7 @@ $chroma-visualgrid-mq-color			: #ff7300 !default; // media query text color
 @if ($chroma-visualgrid-scaffold == true) {
 	html.show-vg {
 		position: relative;
+		min-height: 100vh;
 	}
 	html.show-vg::before {
 		@include chroma-visualgrid();

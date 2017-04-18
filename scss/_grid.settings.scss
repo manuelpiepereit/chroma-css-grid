@@ -29,7 +29,7 @@ $chroma-grid-name-row   		: "row" !default;		// custom row name
 $chroma-grid-name-col   		: "cols" !default;		// custom column name
 
 $chroma-breakpoint-delimiter 	: \@ !default;			// how breakpoints are seperated in classes
-$chroma-column-delimiter 		: false !default; 		// additional classes for columns, eg: cols-5/12 or cols-5-of-12
+$chroma-column-delimiter 		: false !default; 		    // additional classes for columns, eg: cols-5/12 or cols-5-of-12
 
 
 

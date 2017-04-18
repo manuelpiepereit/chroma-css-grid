@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2.5.1
+
+* bugfix grid.modifier
+* bugfix grid.responsive
+* bugfix utils.visualgrid
+* updated documentation
+
 ### 2.5.0
 
 * added utils.visualgrid

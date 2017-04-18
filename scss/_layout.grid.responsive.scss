@@ -77,10 +77,34 @@
 //
 
 @mixin chroma-create-grid-responsive($breakpoint, $total-columns: $chroma-grid-amount) {
-    @for $i from 1 through $chroma-grid-amount {
+    @for $i from 1 through $total-columns {
         .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
             @include chroma-columns($i, $chroma-grid-amount);
         }
+        // add basic fraction classes
+        $_chroma-grid-fraction: $i/$total-columns;
+        @if $_chroma-grid-fraction == 1/2 {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/2#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} !optional;
+            }
+        } 
+        @if $_chroma-grid-fraction == 1/3 {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/3#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} !optional;
+            }
+        } 
+        @if $_chroma-grid-fraction == 1/4 {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/4#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} !optional;
+            }
+        } 
+        @if $_chroma-grid-fraction == 1/1 {
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-full#{$chroma-breakpoint-delimiter}#{$breakpoint},
+            .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-1\/1#{$chroma-breakpoint-delimiter}#{$breakpoint} {
+                @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint} !optional;
+            }
+        }
+        // add additional column delimiter classes
         @if ($chroma-column-delimiter) {
             .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-column-delimiter}#{$total-columns}#{$chroma-breakpoint-delimiter}#{$breakpoint} {
                 @extend .#{$chroma-grid-namespace}#{$chroma-grid-name-col}-#{$i}#{$chroma-breakpoint-delimiter}#{$breakpoint};

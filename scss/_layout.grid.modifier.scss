@@ -24,6 +24,11 @@
 	margin-left: 	$width;
 }
 
+@mixin chroma-column-offset-right($current-column, $total-columns: $chroma-grid-amount){
+	$width:			chroma-column-width($current-column, $total-columns);
+	margin-right: 	$width;
+}
+
 
 
 
